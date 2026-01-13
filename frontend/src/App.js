@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import { HashRouter, Routes, Route, useLocation } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
@@ -119,7 +119,7 @@ const AnimatedRoutes = () => {
 function App() {
   return (
     <div className="App">
-      <HashRouter>
+      <BrowserRouter>
         <a href="#main-content" className="skip-to-main">
           Skip to main content
         </a>
@@ -129,7 +129,7 @@ function App() {
         </main>
         <Footer />
         <ScrollToTop />
-      </HashRouter>
+      </BrowserRouter>
     </div>
   );
 }
