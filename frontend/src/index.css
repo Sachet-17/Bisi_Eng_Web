@@ -2,48 +2,42 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Modern Base Styles */
 body {
     margin: 0;
-    font-family:
-        -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-        "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-        sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
 }
 
 code {
-    font-family:
-        source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
 
 @layer base {
     :root {
         --background: 0 0% 100%;
-        --foreground: 0 0% 3.9%;
+        --foreground: 222 47% 11%;
         --card: 0 0% 100%;
-        --card-foreground: 0 0% 3.9%;
+        --card-foreground: 222 47% 11%;
         --popover: 0 0% 100%;
-        --popover-foreground: 0 0% 3.9%;
+        --popover-foreground: 222 47% 11%;
         --primary: 142 71% 45%;
         --primary-foreground: 0 0% 100%;
         --secondary: 215 50% 23%;
         --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 96.1%;
-        --muted-foreground: 0 0% 45.1%;
+        --muted: 210 40% 96%;
+        --muted-foreground: 215 16% 47%;
         --accent: 142 71% 45%;
         --accent-foreground: 0 0% 100%;
-        --destructive: 0 84.2% 60.2%;
+        --destructive: 0 84% 60%;
         --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 89.8%;
-        --input: 0 0% 89.8%;
+        --border: 214 32% 91%;
+        --input: 214 32% 91%;
         --ring: 142 71% 45%;
-        --chart-1: 142 71% 45%;
-        --chart-2: 217 91% 60%;
-        --chart-3: 215 50% 23%;
-        --chart-4: 142 76% 36%;
-        --chart-5: 217 91% 50%;
-        --radius: 0.5rem;
+        --radius: 0.625rem;
         
         /* BISI Engineering Brand Colors */
         --bisi-green: #22C55E;
@@ -54,30 +48,25 @@ code {
         --bisi-navy: #1a2744;
     }
     .dark {
-        --background: 0 0% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 0 0% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 0 0% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 0 0% 9%;
-        --secondary: 0 0% 14.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 0 0% 14.9%;
-        --muted-foreground: 0 0% 63.9%;
-        --accent: 0 0% 14.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
-        --destructive-foreground: 0 0% 98%;
-        --border: 0 0% 14.9%;
-        --input: 0 0% 14.9%;
-        --ring: 0 0% 83.1%;
-        --chart-1: 220 70% 50%;
-        --chart-2: 160 60% 45%;
-        --chart-3: 30 80% 55%;
-        --chart-4: 280 65% 60%;
-        --chart-5: 340 75% 55%;
+        --background: 222 47% 11%;
+        --foreground: 210 40% 98%;
+        --card: 222 47% 11%;
+        --card-foreground: 210 40% 98%;
+        --popover: 222 47% 11%;
+        --popover-foreground: 210 40% 98%;
+        --primary: 142 71% 45%;
+        --primary-foreground: 0 0% 100%;
+        --secondary: 217 33% 17%;
+        --secondary-foreground: 210 40% 98%;
+        --muted: 217 33% 17%;
+        --muted-foreground: 215 20% 65%;
+        --accent: 217 33% 17%;
+        --accent-foreground: 210 40% 98%;
+        --destructive: 0 63% 31%;
+        --destructive-foreground: 210 40% 98%;
+        --border: 217 33% 17%;
+        --input: 217 33% 17%;
+        --ring: 142 71% 45%;
     }
 }
 
@@ -88,17 +77,46 @@ code {
     body {
         @apply bg-background text-foreground;
     }
+    
+    /* Modern Heading Styles */
+    h1, h2, h3, h4, h5, h6 {
+        font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+    }
+    
+    h1 {
+        @apply text-4xl md:text-5xl lg:text-6xl;
+        line-height: 1.1;
+    }
+    
+    h2 {
+        @apply text-3xl md:text-4xl lg:text-5xl;
+        line-height: 1.15;
+    }
+    
+    h3 {
+        @apply text-2xl md:text-3xl;
+        line-height: 1.2;
+    }
+    
+    p {
+        @apply text-base leading-relaxed;
+        color: #475569;
+    }
 }
 
 /* Smooth scroll behavior */
 html {
     scroll-behavior: smooth;
+    scroll-padding-top: 100px;
 }
 
 /* Focus visible improvements for accessibility */
 *:focus-visible {
     outline: 2px solid var(--bisi-green);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
 /* Skip to main content link for accessibility */
@@ -108,10 +126,10 @@ html {
     left: 0;
     background: var(--bisi-green);
     color: white;
-    padding: 8px 16px;
+    padding: 12px 20px;
     text-decoration: none;
     z-index: 100;
-    border-radius: 0 0 4px 0;
+    border-radius: 0 0 8px 0;
     font-weight: 500;
 }
 
@@ -123,7 +141,6 @@ html {
 @media (max-width: 768px) {
     button, a, input, textarea, select {
         min-height: 44px;
-        min-width: 44px;
     }
 }
 
@@ -136,6 +153,80 @@ html {
 ::-moz-selection {
     background-color: var(--bisi-green);
     color: white;
+}
+
+/* Modern scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Modern button base styles */
+.btn-primary {
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-[#22C55E] text-white font-semibold rounded-full transition-all duration-300 hover:bg-[#16A34A] hover:shadow-glow active:scale-[0.98];
+}
+
+.btn-secondary {
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-white text-[#1a2744] font-semibold rounded-full transition-all duration-300 border border-gray-200 hover:border-[#22C55E] hover:text-[#22C55E] hover:shadow-soft active:scale-[0.98];
+}
+
+.btn-outline {
+    @apply inline-flex items-center justify-center gap-2.5 px-7 py-4 bg-transparent text-white font-semibold rounded-full transition-all duration-300 border-2 border-white/30 hover:border-white hover:bg-white/10 active:scale-[0.98];
+}
+
+/* Modern card styles */
+.card-modern {
+    @apply bg-white rounded-2xl p-8 shadow-soft hover:shadow-soft-lg transition-all duration-300;
+}
+
+.card-hover {
+    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-soft-lg;
+}
+
+/* Section spacing */
+.section-padding {
+    @apply py-20 lg:py-28;
+}
+
+.section-padding-sm {
+    @apply py-16 lg:py-20;
+}
+
+/* Container */
+.container-custom {
+    @apply max-w-7xl mx-auto px-6 lg:px-8;
+}
+
+/* Glass effect */
+.glass {
+    @apply bg-white/80 backdrop-blur-lg;
+}
+
+.glass-dark {
+    @apply bg-[#1a2744]/90 backdrop-blur-lg;
+}
+
+/* Text gradient */
+.text-gradient {
+    @apply bg-gradient-to-r from-[#22C55E] to-[#3B82F6] bg-clip-text text-transparent;
+}
+
+/* Section label/eyebrow */
+.section-label {
+    @apply text-sm font-semibold tracking-wider uppercase text-[#22C55E] mb-4;
 }
 
 @layer base {
