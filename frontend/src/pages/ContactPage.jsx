@@ -67,7 +67,6 @@ const ContactPage = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
     
-    // Clear error when user starts typing
     if (errors[name]) {
       setErrors({ ...errors, [name]: '' });
     }
@@ -75,7 +74,6 @@ const ContactPage = () => {
 
   const handleBlur = (fieldName) => {
     setTouched({ ...touched, [fieldName]: true });
-    // Validate on blur
     if (fieldName === 'email' && formData.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
       setErrors({ ...errors, email: 'Please enter a valid email address' });
     } else if (fieldName === 'phone' && formData.phone && !/^[\d\s\-\+\(\)]+$/.test(formData.phone)) {
@@ -100,13 +98,12 @@ const ContactPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[45vh] flex items-center bg-gradient-to-br from-[#1a2744] via-[#1E3A5F] to-[#1a2744] overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[50vh] flex items-center bg-gradient-to-br from-[#0f172a] via-[#1E3A5F] to-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2744]/95 via-[#1a2744]/80 to-[#1a2744]/60"></div>
-          {/* Decorative elements */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/60"></div>
           <motion.div 
-            className="absolute top-20 right-20 w-72 h-72 bg-[#22C55E]/10 rounded-full blur-3xl"
+            className="absolute top-20 right-20 w-80 h-80 bg-[#22C55E]/10 rounded-full blur-3xl"
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
@@ -117,19 +114,19 @@ const ContactPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
+              <span className="section-label !text-[#22C55E]">
                 Get in Touch
               </span>
             </motion.div>
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-white leading-[1.15] mb-4"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight mb-6 tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
@@ -149,41 +146,41 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-12 lg:py-16 bg-white overflow-hidden">
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-16">
             {/* Contact Info */}
             <FadeInLeft className="lg:col-span-1">
-              <h2 className="text-2xl font-light text-[#1a2744] mb-6">
+              <h2 className="font-display text-3xl font-semibold text-[#0f172a] mb-6 tracking-tight">
                 Get in Touch
               </h2>
-              <p className="text-gray-600 mb-8">
+              <p className="text-gray-600 mb-10 text-lg leading-relaxed">
                 Have a project in mind? We'd love to hear from you. Contact us using the form or reach out directly.
               </p>
 
-              <StaggerContainer staggerDelay={0.1} className="space-y-6">
+              <StaggerContainer staggerDelay={0.1} className="space-y-8">
                 {contactInfo.map((item, index) => (
                   <StaggerItem key={index}>
                     <motion.div 
-                      className="flex gap-4"
+                      className="flex gap-5"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <motion.div 
-                        className="w-12 h-12 bg-[#22C55E]/10 rounded-lg flex items-center justify-center flex-shrink-0"
-                        whileHover={{ backgroundColor: '#22C55E', scale: 1.1 }}
+                        className="w-14 h-14 bg-[#22C55E]/10 rounded-2xl flex items-center justify-center flex-shrink-0"
+                        whileHover={{ backgroundColor: '#22C55E', scale: 1.05 }}
                         transition={{ duration: 0.3 }}
                       >
                         <item.icon className="w-6 h-6 text-[#22C55E]" />
                       </motion.div>
                       <div>
-                        <h3 className="font-light text-[#1a2744]">{item.title}</h3>
+                        <h3 className="font-semibold text-[#0f172a] text-lg mb-1">{item.title}</h3>
                         {item.href ? (
-                          <a href={item.href} className="text-gray-600 text-sm hover:text-[#22C55E] transition-colors">
+                          <a href={item.href} className="text-gray-600 hover:text-[#22C55E] transition-colors">
                             {item.value}
                           </a>
                         ) : (
-                          <p className="text-gray-600 text-sm">{item.value}</p>
+                          <p className="text-gray-600">{item.value}</p>
                         )}
                       </div>
                     </motion.div>
@@ -195,14 +192,14 @@ const ContactPage = () => {
             {/* Contact Form */}
             <FadeInRight className="lg:col-span-2">
               <motion.div 
-                className="bg-gray-50 rounded-lg p-8"
+                className="bg-gray-50 rounded-3xl p-8 lg:p-12"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
                 {submitted ? (
                   <motion.div 
-                    className="text-center py-12"
+                    className="text-center py-16"
                     initial={{ opacity: 0, scale: 0.9 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.4 }}
@@ -212,29 +209,29 @@ const ContactPage = () => {
                       animate={{ scale: 1 }}
                       transition={{ type: 'spring', stiffness: 200, damping: 15, delay: 0.1 }}
                     >
-                      <CheckCircle className="w-16 h-16 text-green-500 mx-auto mb-4" />
+                      <CheckCircle className="w-20 h-20 text-[#22C55E] mx-auto mb-6" />
                     </motion.div>
-                    <h3 className="text-2xl font-light text-[#1a2744] mb-2">
+                    <h3 className="font-display text-3xl font-semibold text-[#0f172a] mb-3 tracking-tight">
                       Message Sent!
                     </h3>
-                    <p className="text-gray-600">
+                    <p className="text-gray-600 text-lg">
                       Thank you for reaching out. We'll get back to you shortly.
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-8">
                     <div className="grid md:grid-cols-2 gap-6">
                       {[
-                        { name: 'name', label: 'Full Name *', type: 'text', placeholder: 'John Doe', required: true },
-                        { name: 'email', label: 'Email Address *', type: 'email', placeholder: 'john@example.com', required: true }
+                        { name: 'name', label: 'Full Name', type: 'text', placeholder: 'John Doe', required: true },
+                        { name: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com', required: true }
                       ].map((field) => (
                         <motion.div 
                           key={field.name}
-                          animate={{ scale: focusedField === field.name ? 1.02 : 1 }}
+                          animate={{ scale: focusedField === field.name ? 1.01 : 1 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
-                            {field.label}
+                          <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                            {field.label} {field.required && <span className="text-[#22C55E]">*</span>}
                           </label>
                           <input
                             type={field.type}
@@ -249,13 +246,13 @@ const ContactPage = () => {
                             required={field.required}
                             aria-invalid={errors[field.name] ? 'true' : 'false'}
                             aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
-                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#22C55E] focus:border-transparent outline-none transition-all ${
-                              errors[field.name] ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                              errors[field.name] ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                             }`}
                             placeholder={field.placeholder}
                           />
                           {errors[field.name] && touched[field.name] && (
-                            <p id={`${field.name}-error`} className="mt-1 text-sm text-red-600" role="alert">
+                            <p id={`${field.name}-error`} className="mt-2 text-sm text-red-600" role="alert">
                               {errors[field.name]}
                             </p>
                           )}
@@ -270,10 +267,10 @@ const ContactPage = () => {
                       ].map((field) => (
                         <motion.div 
                           key={field.name}
-                          animate={{ scale: focusedField === field.name ? 1.02 : 1 }}
+                          animate={{ scale: focusedField === field.name ? 1.01 : 1 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-semibold text-[#0f172a] mb-3">
                             {field.label}
                           </label>
                           <input
@@ -288,13 +285,13 @@ const ContactPage = () => {
                             }}
                             aria-invalid={errors[field.name] ? 'true' : 'false'}
                             aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
-                            className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#22C55E] focus:border-transparent outline-none transition-all ${
-                              errors[field.name] ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                              errors[field.name] ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                             }`}
                             placeholder={field.placeholder}
                           />
                           {errors[field.name] && touched[field.name] && (
-                            <p id={`${field.name}-error`} className="mt-1 text-sm text-red-600" role="alert">
+                            <p id={`${field.name}-error`} className="mt-2 text-sm text-red-600" role="alert">
                               {errors[field.name]}
                             </p>
                           )}
@@ -303,11 +300,11 @@ const ContactPage = () => {
                     </div>
 
                     <motion.div
-                      animate={{ scale: focusedField === 'subject' ? 1.02 : 1 }}
+                      animate={{ scale: focusedField === 'subject' ? 1.01 : 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Subject *
+                      <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                        Subject <span className="text-[#22C55E]">*</span>
                       </label>
                       <input
                         type="text"
@@ -322,24 +319,24 @@ const ContactPage = () => {
                         required
                         aria-invalid={errors.subject ? 'true' : 'false'}
                         aria-describedby={errors.subject ? 'subject-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#22C55E] focus:border-transparent outline-none transition-all ${
-                          errors.subject ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                        className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                          errors.subject ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         placeholder="How can we help you?"
                       />
                       {errors.subject && touched.subject && (
-                        <p id="subject-error" className="mt-1 text-sm text-red-600" role="alert">
+                        <p id="subject-error" className="mt-2 text-sm text-red-600" role="alert">
                           {errors.subject}
                         </p>
                       )}
                     </motion.div>
 
                     <motion.div
-                      animate={{ scale: focusedField === 'message' ? 1.02 : 1 }}
+                      animate={{ scale: focusedField === 'message' ? 1.01 : 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
-                        Message *
+                      <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                        Message <span className="text-[#22C55E]">*</span>
                       </label>
                       <textarea
                         name="message"
@@ -354,13 +351,13 @@ const ContactPage = () => {
                         rows={5}
                         aria-invalid={errors.message ? 'true' : 'false'}
                         aria-describedby={errors.message ? 'message-error' : undefined}
-                        className={`w-full px-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#22C55E] focus:border-transparent outline-none transition-all resize-none ${
-                          errors.message ? 'border-red-300 focus:ring-red-500' : 'border-gray-200'
+                        className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all resize-none text-base ${
+                          errors.message ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         placeholder="Tell us about your project..."
                       />
                       {errors.message && touched.message && (
-                        <p id="message-error" className="mt-1 text-sm text-red-600" role="alert">
+                        <p id="message-error" className="mt-2 text-sm text-red-600" role="alert">
                           {errors.message}
                         </p>
                       )}
@@ -368,9 +365,9 @@ const ContactPage = () => {
 
                     <motion.button
                       type="submit"
-                      className="w-full md:w-auto flex items-center justify-center gap-2 bg-[#22C55E] text-white px-8 py-4 rounded-full font-medium"
-                      whileHover={{ scale: 1.05, backgroundColor: '#16A34A' }}
-                      whileTap={{ scale: 0.95 }}
+                      className="w-full md:w-auto flex items-center justify-center gap-3 bg-[#22C55E] text-white px-10 py-4 rounded-full font-semibold text-base shadow-lg hover:shadow-glow transition-all duration-300"
+                      whileHover={{ scale: 1.02, backgroundColor: '#16A34A' }}
+                      whileTap={{ scale: 0.98 }}
                     >
                       Send Message
                       <Send className="w-5 h-5" />
@@ -385,7 +382,7 @@ const ContactPage = () => {
 
       {/* Map Placeholder */}
       <motion.section 
-        className="h-96 bg-gray-200 relative overflow-hidden"
+        className="h-[450px] bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
@@ -402,10 +399,11 @@ const ContactPage = () => {
             <motion.div
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+              className="w-20 h-20 bg-[#22C55E]/10 rounded-full flex items-center justify-center mx-auto mb-6"
             >
-              <MapPin className="w-12 h-12 text-[#22C55E] mx-auto mb-4" />
+              <MapPin className="w-10 h-10 text-[#22C55E]" />
             </motion.div>
-            <p className="text-gray-600">Map integration can be added here</p>
+            <p className="text-gray-500 text-lg font-medium">Map integration can be added here</p>
           </motion.div>
         </div>
       </motion.section>
