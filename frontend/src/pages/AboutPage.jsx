@@ -179,7 +179,7 @@ const AboutPage = () => {
       </section>
 
       {/* Capabilities - Enhanced Grid */}
-      <section id="capabilities" className="py-12 lg:py-16 bg-white overflow-hidden">
+      <section id="capabilities" className="py-20 lg:py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <FadeInUp className="text-center mb-10 lg:mb-12">
             <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
