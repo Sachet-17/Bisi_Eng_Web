@@ -143,7 +143,7 @@ const AboutPage = () => {
                 <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
                   Leadership Message
                 </span>
-                <h2 className="text-3xl lg:text-4xl font-light text-[#1a2744] mb-4 leading-tight">
+                <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-5 leading-tight tracking-tight">
                   {aboutPage.mdMessage.title}
                 </h2>
               </motion.div>
