@@ -6,9 +6,19 @@ import { navigation } from '../data/mock';
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
+  const [scrolled, setScrolled] = useState(false);
   const dropdownRef = useRef(null);
   const location = useLocation();
   const navigate = useNavigate();
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -31,7 +41,7 @@ const Navbar = () => {
       setTimeout(() => {
         const element = document.querySelector(location.hash);
         if (element) {
-          const navbarHeight = 80; // Fixed navbar height
+          const navbarHeight = 100;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
           window.scrollTo({ top: elementPosition - navbarHeight, behavior: 'smooth' });
         }
@@ -45,21 +55,18 @@ const Navbar = () => {
   };
 
   const handleNavClick = (href, e) => {
-    // Check if href contains a hash
     if (href.includes('#')) {
       e.preventDefault();
       const [path, hash] = href.split('#');
       
-      // If we're already on the same page, just scroll
       if (location.pathname === path) {
         const element = document.getElementById(hash);
         if (element) {
-          const navbarHeight = 80;
+          const navbarHeight = 100;
           const elementPosition = element.getBoundingClientRect().top + window.pageYOffset;
           window.scrollTo({ top: elementPosition - navbarHeight, behavior: 'smooth' });
         }
       } else {
-        // Navigate to the page, then scroll
         navigate(href);
       }
     }
@@ -67,19 +74,23 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white shadow-sm">
-      <div className="max-w-7xl mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      scrolled 
+        ? 'bg-white/95 backdrop-blur-lg shadow-soft py-3' 
+        : 'bg-white py-4'
+    }`}>
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex items-center gap-3 group">
             <img 
               src="/images/bisi-logo.png" 
               alt="BISI Engineering Logo" 
-              className="h-10 w-auto"
+              className="h-11 w-auto transition-transform duration-300 group-hover:scale-105"
             />
             <div className="flex flex-col">
-              <span className="text-lg font-bold text-gray-900 tracking-tight leading-tight">BISI</span>
-              <span className="text-xs text-gray-600 tracking-wider">ENGINEERING</span>
+              <span className="text-xl font-bold text-gray-900 tracking-tight leading-tight font-display">BISI</span>
+              <span className="text-[10px] text-gray-500 tracking-[0.2em] font-medium uppercase">Engineering</span>
             </div>
           </Link>
 
@@ -100,19 +111,23 @@ const Navbar = () => {
                     aria-expanded={activeDropdown === index}
                     aria-haspopup="true"
                     aria-label={`${link.name} menu`}
-                    className={`flex items-center gap-1 px-3 py-2 text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2 ${
-                      isActive(link.href) ? 'text-[#22C55E]' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    className={`flex items-center gap-1.5 px-4 py-2.5 text-[15px] font-medium transition-all duration-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 focus:ring-offset-2 ${
+                      isActive(link.href) 
+                        ? 'text-[#22C55E]' 
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
                     {link.name}
-                    <ChevronDown className={`w-4 h-4 transition-transform ${activeDropdown === index ? 'rotate-180' : ''}`} aria-hidden="true" />
+                    <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''}`} aria-hidden="true" />
                   </button>
                 ) : (
                   <Link
                     to={link.href}
                     aria-current={isActive(link.href) ? 'page' : undefined}
-                    className={`px-3 py-2 text-sm font-medium transition-colors rounded-md focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2 ${
-                      isActive(link.href) ? 'text-[#22C55E]' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                    className={`px-4 py-2.5 text-[15px] font-medium transition-all duration-200 rounded-xl block focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 focus:ring-offset-2 ${
+                      isActive(link.href) 
+                        ? 'text-[#22C55E]' 
+                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                     }`}
                   >
                     {link.name}
@@ -122,7 +137,7 @@ const Navbar = () => {
                 {/* Dropdown Menu */}
                 {link.hasDropdown && activeDropdown === index && (
                   <div 
-                    className="absolute top-full left-0 mt-1 w-56 bg-white rounded-lg shadow-lg border border-gray-100 py-2 z-50"
+                    className="absolute top-full left-0 mt-2 w-60 bg-white rounded-2xl shadow-soft-lg border border-gray-100/50 py-3 z-50 animate-fade-in"
                     role="menu"
                     aria-label={`${link.name} submenu`}
                   >
@@ -131,7 +146,7 @@ const Navbar = () => {
                         key={itemIndex}
                         href={item.href}
                         role="menuitem"
-                        className="block px-4 py-2 text-sm text-gray-600 hover:text-[#22C55E] hover:bg-gray-50 focus:outline-none focus:bg-gray-50 focus:text-[#22C55E] transition-colors"
+                        className="block px-5 py-3 text-[15px] text-gray-600 hover:text-[#22C55E] hover:bg-gray-50 focus:outline-none focus:bg-gray-50 focus:text-[#22C55E] transition-all duration-200"
                         onClick={(e) => handleNavClick(item.href, e)}
                         onKeyDown={(e) => {
                           if (e.key === 'Enter' || e.key === ' ') {
@@ -151,10 +166,10 @@ const Navbar = () => {
           {/* CTA Button */}
           <Link
             to={navigation.cta.href}
-            className="hidden xl:flex items-center gap-2 bg-[#22C55E] text-white px-5 py-2.5 rounded-full text-sm font-medium hover:bg-[#16A34A] transition-all group"
+            className="hidden xl:flex items-center gap-2.5 bg-[#22C55E] text-white px-6 py-3 rounded-full text-[15px] font-semibold hover:bg-[#16A34A] transition-all duration-300 group shadow-sm hover:shadow-glow"
           >
             {navigation.cta.name}
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" />
           </Link>
 
           {/* Mobile Menu Button */}
@@ -163,7 +178,7 @@ const Navbar = () => {
             aria-expanded={isOpen}
             aria-label={isOpen ? 'Close menu' : 'Open menu'}
             aria-controls="mobile-menu"
-            className="xl:hidden p-2 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2 rounded-md"
+            className="xl:hidden p-2.5 text-gray-600 focus:outline-none focus:ring-2 focus:ring-[#22C55E]/20 focus:ring-offset-2 rounded-xl hover:bg-gray-50 transition-colors"
           >
             {isOpen ? <X className="w-6 h-6" aria-hidden="true" /> : <Menu className="w-6 h-6" aria-hidden="true" />}
           </button>
@@ -172,26 +187,28 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div id="mobile-menu" className="xl:hidden bg-white border-t max-h-[80vh] overflow-y-auto" role="menu">
-          <div className="px-4 py-4 space-y-1">
+        <div id="mobile-menu" className="xl:hidden bg-white border-t border-gray-100 max-h-[80vh] overflow-y-auto animate-fade-in" role="menu">
+          <div className="px-6 py-6 space-y-2">
             {navigation.links.map((link, index) => (
               <div key={index}>
                 <Link
                   to={link.href.split('#')[0]}
-                  className={`block px-3 py-2 rounded-md font-medium ${
-                    isActive(link.href) ? 'text-[#22C55E] bg-green-50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  className={`block px-4 py-3 rounded-xl font-medium text-[15px] transition-all duration-200 ${
+                    isActive(link.href) 
+                      ? 'text-[#22C55E] bg-green-50' 
+                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.name}
                 </Link>
                 {link.dropdownItems && (
-                  <div className="ml-4 mt-1 space-y-1">
+                  <div className="ml-4 mt-1 space-y-1 border-l-2 border-gray-100 pl-4">
                     {link.dropdownItems.map((item, itemIndex) => (
                       <a
                         key={itemIndex}
                         href={item.href}
-                        className="block px-3 py-1.5 text-sm text-gray-500 hover:text-[#22C55E]"
+                        className="block px-4 py-2.5 text-sm text-gray-500 hover:text-[#22C55E] transition-colors rounded-lg"
                         onClick={(e) => {
                           handleNavClick(item.href, e);
                           setIsOpen(false);
@@ -204,14 +221,16 @@ const Navbar = () => {
                 )}
               </div>
             ))}
-            <Link
-              to={navigation.cta.href}
-              className="inline-flex items-center gap-2 bg-[#22C55E] text-white px-5 py-2.5 rounded-full text-sm font-medium mt-4"
-              onClick={() => setIsOpen(false)}
-            >
-              {navigation.cta.name}
-              <ArrowRight className="w-4 h-4" />
-            </Link>
+            <div className="pt-4">
+              <Link
+                to={navigation.cta.href}
+                className="inline-flex items-center gap-2.5 bg-[#22C55E] text-white px-6 py-3.5 rounded-full text-[15px] font-semibold w-full justify-center hover:bg-[#16A34A] transition-all duration-300"
+                onClick={() => setIsOpen(false)}
+              >
+                {navigation.cta.name}
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </div>
           </div>
         </div>
       )}
