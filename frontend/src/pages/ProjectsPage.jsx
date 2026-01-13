@@ -4,12 +4,11 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { projectsPage } from '../data/mock';
 import { MapPin, Calendar, DollarSign, ArrowRight } from 'lucide-react';
 import { SafeImage } from '../components/common';
-import { FadeInUp, StaggerContainer, StaggerItem } from '../components/animations';
+import { FadeInUp } from '../components/animations';
 
 const ProjectsPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
 
-  // Scroll to top when category changes
   const handleCategoryChange = (category) => {
     setActiveCategory(category);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -27,13 +26,12 @@ const ProjectsPage = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
     >
-      {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[45vh] flex items-center bg-gradient-to-br from-[#1a2744] via-[#1E3A5F] to-[#1a2744] overflow-hidden">
+      {/* Hero Section */}
+      <section className="relative min-h-[50vh] flex items-center bg-gradient-to-br from-[#0f172a] via-[#1E3A5F] to-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2744]/95 via-[#1a2744]/80 to-[#1a2744]/60"></div>
-          {/* Decorative elements */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/60"></div>
           <motion.div 
-            className="absolute top-20 right-20 w-72 h-72 bg-[#22C55E]/10 rounded-full blur-3xl"
+            className="absolute top-20 right-20 w-80 h-80 bg-[#22C55E]/10 rounded-full blur-3xl"
             animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
@@ -44,19 +42,19 @@ const ProjectsPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
+              <span className="section-label !text-[#22C55E]">
                 Our Portfolio
               </span>
             </motion.div>
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-white leading-[1.15] mb-4"
+              className="font-display text-4xl md:text-5xl lg:text-6xl font-semibold text-white leading-tight mb-6 tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.1 }}
@@ -75,11 +73,11 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      {/* Filter Tabs with animation */}
-      <section className="py-8 bg-white border-b sticky top-20 z-40">
+      {/* Filter Tabs */}
+      <section className="py-10 bg-white border-b border-gray-100 sticky top-[72px] z-40 backdrop-blur-lg bg-white/95">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div 
-            className="flex flex-wrap gap-2 justify-center"
+            className="flex flex-wrap gap-3 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
@@ -88,18 +86,18 @@ const ProjectsPage = () => {
               <motion.button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors relative ${
+                className={`px-6 py-3 rounded-full text-sm font-semibold transition-all relative ${
                   activeCategory === category
                     ? 'text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
               >
                 {activeCategory === category && (
                   <motion.div
                     layoutId="activeProjectFilter"
-                    className="absolute inset-0 bg-[#22C55E] rounded-full"
+                    className="absolute inset-0 bg-[#22C55E] rounded-full shadow-lg"
                     transition={{ type: 'spring', stiffness: 500, damping: 30 }}
                   />
                 )}
@@ -110,11 +108,11 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      {/* Projects Grid with AnimatePresence */}
-      <section className="py-12 lg:py-16 bg-white">
+      {/* Projects Grid */}
+      <section className="py-20 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
             layout
           >
             <AnimatePresence mode="popLayout">
@@ -126,16 +124,16 @@ const ProjectsPage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="bg-white rounded-lg overflow-hidden shadow-sm group"
+                  className="bg-white rounded-2xl overflow-hidden shadow-soft group"
                   whileHover={{ 
                     y: -8,
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.1)'
+                    boxShadow: '0 25px 50px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <div className="relative h-56 overflow-hidden">
+                  <div className="relative h-64 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
-                      whileHover={{ scale: 1.1 }}
+                      whileHover={{ scale: 1.08 }}
                       transition={{ duration: 0.4 }}
                     >
                       <SafeImage
@@ -145,36 +143,36 @@ const ProjectsPage = () => {
                         placeholderLabel={project.title}
                       />
                     </motion.div>
-                    <div className="absolute top-4 left-4">
-                      <span className="bg-[#22C55E] text-white text-xs px-3 py-1 rounded-full">
+                    <div className="absolute top-5 left-5">
+                      <span className="bg-[#22C55E] text-white text-xs font-semibold px-4 py-1.5 rounded-full shadow-lg">
                         {project.category}
                       </span>
                     </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-light text-[#1a2744] mb-2">
+                  <div className="p-7">
+                    <h3 className="font-display text-xl font-semibold text-[#0f172a] mb-3 tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 text-sm mb-4">
+                    <p className="text-gray-600 text-base mb-5 leading-relaxed">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-4">
-                      <span className="flex items-center gap-1">
+                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-5">
+                      <span className="flex items-center gap-1.5">
                         <MapPin className="w-4 h-4" />
                         {project.location}
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1.5">
                         <Calendar className="w-4 h-4" />
                         {project.year}
                       </span>
-                      <span className="flex items-center gap-1">
+                      <span className="flex items-center gap-1.5">
                         <DollarSign className="w-4 h-4" />
                         {project.value}
                       </span>
                     </div>
                     <Link
                       to="#"
-                      className="group/link inline-flex items-center gap-2 text-[#22C55E] text-sm font-medium hover:gap-3 transition-all"
+                      className="group/link inline-flex items-center gap-2 text-[#22C55E] text-sm font-semibold hover:gap-3 transition-all"
                     >
                       View Details
                       <ArrowRight className="w-4 h-4" />
@@ -187,25 +185,33 @@ const ProjectsPage = () => {
         </div>
       </section>
 
-      {/* CTA - Enhanced */}
-      <section className="py-12 lg:py-16 bg-gradient-to-r from-[#22C55E] via-[#16A34A] to-[#22C55E] overflow-hidden relative">
-        {/* Animated background */}
+      {/* CTA */}
+      <section className="py-20 lg:py-28 bg-gradient-to-br from-[#22C55E] via-[#16A34A] to-[#15803d] overflow-hidden relative">
         <div className="absolute inset-0">
           <motion.div 
-            className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"
+            className="absolute top-10 left-10 w-72 h-72 bg-white/10 rounded-full blur-3xl"
             animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
             transition={{ duration: 8, repeat: Infinity }}
           />
           <motion.div 
-            className="absolute bottom-10 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl"
+            className="absolute bottom-10 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"
             animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
         </div>
         
         <FadeInUp className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
+          <motion.span
+            className="section-label !text-white/80"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+          >
+            Start Your Project
+          </motion.span>
           <motion.h2 
-            className="text-3xl lg:text-4xl font-light text-white mb-4"
+            className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-white mb-6 tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -214,7 +220,7 @@ const ProjectsPage = () => {
             Have a project in mind?
           </motion.h2>
           <motion.p 
-            className="text-white/90 text-base lg:text-lg mb-8 max-w-2xl mx-auto"
+            className="text-white/90 text-lg lg:text-xl mb-10 max-w-2xl mx-auto leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -224,9 +230,9 @@ const ProjectsPage = () => {
           </motion.p>
           <Link to="/contact">
             <motion.span
-              className="group inline-flex items-center gap-3 bg-white text-[#1a2744] px-8 py-4 rounded-full font-medium text-base shadow-xl hover:shadow-2xl"
-              whileHover={{ scale: 1.05, backgroundColor: '#f9fafb' }}
-              whileTap={{ scale: 0.95 }}
+              className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full font-semibold text-base shadow-xl hover:shadow-2xl transition-all duration-300"
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
