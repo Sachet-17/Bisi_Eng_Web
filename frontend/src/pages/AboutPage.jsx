@@ -67,9 +67,9 @@ const AboutPage = () => {
       </section>
 
       {/* Stats Bar - Quick Overview */}
-      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+      <section className="py-10 lg:py-12 bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {[
               { value: '20+', label: 'Years Experience' },
               { value: '150+', label: 'Happy Clients' },
@@ -81,10 +81,10 @@ const AboutPage = () => {
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
-                  <div className="text-3xl lg:text-4xl font-light text-[#22C55E] mb-1">
+                  <div className="font-display text-4xl lg:text-5xl font-bold text-[#22C55E] mb-2 tracking-tight">
                     {stat.value}
                   </div>
-                  <div className="text-sm text-gray-600 font-medium">
+                  <div className="text-sm text-gray-600 font-semibold">
                     {stat.label}
                   </div>
                 </motion.div>
