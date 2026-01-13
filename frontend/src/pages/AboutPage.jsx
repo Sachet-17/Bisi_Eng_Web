@@ -42,7 +42,7 @@ const AboutPage = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
+              <span className="section-label !text-[#22C55E]">
                 Our Story
               </span>
             </motion.div>
