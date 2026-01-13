@@ -95,7 +95,7 @@ const AboutPage = () => {
       </section>
 
       {/* MD Message - Redesigned */}
-      <section id="md-message" className="py-12 lg:py-16 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
+      <section id="md-message" className="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
         {/* Background accent */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#22C55E]/5 to-transparent"></div>
         
