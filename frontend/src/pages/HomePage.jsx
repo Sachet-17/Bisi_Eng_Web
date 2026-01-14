@@ -280,20 +280,7 @@ const HomePage = () => {
             {(() => {
               const allClients = clientsPage.clientCategories.flatMap(category => category.clients);
               return (
-                <motion.div
-                  className="flex items-center gap-16 px-8"
-                  animate={{
-                    x: ['0%', '-50%'],
-                  }}
-                  transition={{
-                    x: {
-                      repeat: Infinity,
-                      repeatType: "loop",
-                      duration: 50,
-                      ease: "linear",
-                    },
-                  }}
-                >
+                <div className="marquee-container flex items-center gap-16 px-8">
                   {allClients.map((client, index) => (
                     <motion.div
                       key={`first-${index}-${client.name}`}
@@ -323,7 +310,7 @@ const HomePage = () => {
                       />
                     </motion.div>
                   ))}
-                </motion.div>
+                </div>
               );
             })()}
           </div>
