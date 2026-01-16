@@ -406,9 +406,16 @@ const AboutPage = () => {
             <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
               {aboutPage.structure.title}
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto mb-6">
               {aboutPage.structure.subtitle}
             </p>
+            <Link
+              to="/team"
+              className="inline-flex items-center gap-2 text-base text-[#22C55E] hover:text-[#16A34A] transition-all duration-300 group font-medium"
+            >
+              Meet Our Team
+              <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+            </Link>
           </FadeInUp>
 
           <StaggerContainer staggerDelay={0.08} className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -521,8 +528,8 @@ const AboutPage = () => {
                 <Users className="w-24 h-24 text-white/20 mx-auto" />
               </motion.div>
               <div className="text-white/90">
-                <div className="text-5xl lg:text-6xl font-bold mb-2">27+</div>
-                <div className="text-lg font-medium">Years of Excellence</div>
+                <div className="text-5xl lg:text-6xl font-bold mb-2">Zero</div>
+                <div className="text-lg font-medium">Compromise</div>
               </div>
             </motion.div>
           </FadeInRight>
