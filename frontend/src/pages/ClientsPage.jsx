@@ -105,7 +105,7 @@ const ClientsPage = () => {
                   {category.clients.map((client, clientIndex) => (
                     <StaggerItem key={clientIndex}>
                       <motion.div 
-                        className="bg-white p-6 rounded-lg shadow-sm flex flex-col items-center justify-center min-h-[140px] group cursor-pointer"
+                        className="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center min-h-[200px] group cursor-pointer border border-gray-100 hover:border-[#22C55E]/20 transition-all duration-300 overflow-hidden"
                         whileHover={{ 
                           y: -5, 
                           boxShadow: '0 15px 30px rgba(0,0,0,0.1)',
@@ -114,20 +114,23 @@ const ClientsPage = () => {
                         transition={{ duration: 0.3 }}
                       >
                         <motion.div
-                          className="w-full h-20 mb-3 flex items-center justify-center"
-                          whileHover={{ scale: 1.1 }}
+                          className="w-full h-28 mb-4 flex items-center justify-center px-6 overflow-hidden relative"
+                          whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <SafeImage
-                            src={client.logo}
-                            alt={client.name}
-                            className="max-w-full max-h-20 object-contain"
-                            placeholderLabel={client.name}
-                            aspectRatio=""
-                            loading="lazy"
-                          />
+                          <div className="w-full h-full flex items-center justify-center">
+                            <SafeImage
+                              src={client.logo}
+                              alt={client.name}
+                              className="max-w-full max-h-full w-auto h-auto object-contain"
+                              style={{ maxWidth: '100%', maxHeight: '100%', width: 'auto', height: 'auto' }}
+                              placeholderLabel={client.name}
+                              aspectRatio=""
+                              loading="lazy"
+                            />
+                          </div>
                         </motion.div>
-                        <h3 className="text-sm font-medium text-[#1E3A5F] group-hover:text-[#22C55E] transition-colors text-center leading-tight">
+                        <h3 className="text-sm font-medium text-[#1E3A5F] group-hover:text-[#22C55E] transition-colors text-center leading-tight mt-2 px-2">
                           {client.name}
                         </h3>
                       </motion.div>
