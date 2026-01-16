@@ -46,11 +46,11 @@ export const statsSection = {
   title: 'Our Track Record of Excellence',
   subtitle: 'Numbers that speak for themselves',
   stats: [
-    { value: '20+', label: 'Years of Experience', description: 'Delivering excellence since 2004' },
-    { value: '30+', label: 'Major Projects', description: 'Successfully completed' },
-    { value: '1000+', label: 'Workforce Capacity', description: 'Skilled professionals' },
-    { value: '27+', label: 'Prestigious Clients', description: 'Trust us with their projects' },
-    { value: '₹100Cr+', label: 'Project Value', description: 'Executed till date' },
+    { value: '27+', label: 'Year experience', description: 'Delivering excellence since 2004' },
+    { value: '100+', label: "Happy client's", description: 'Trust us with their projects' },
+    { value: '100+', label: 'Projects', description: 'Successfully completed' },
+    { value: '800+ cr', label: 'Work completed', description: 'Executed till date' },
+    { value: '4300+', label: 'Team members', description: 'Skilled professionals' },
     { value: 'ISO', label: 'Certified', description: '9001:2015 & 45001:2018' }
   ]
 };
