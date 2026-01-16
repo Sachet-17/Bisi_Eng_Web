@@ -43,7 +43,7 @@ const ServicesPage = () => {
               transition={{ duration: 0.6 }}
             >
               <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
-                Our Services
+                What we can do for you
               </span>
             </motion.div>
             <motion.h1 
