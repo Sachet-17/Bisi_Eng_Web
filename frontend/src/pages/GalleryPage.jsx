@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { galleryPage } from '../data/mock';
 import { X, ChevronLeft, ChevronRight, ImageOff } from 'lucide-react';
@@ -25,21 +25,25 @@ const GalleryPage = () => {
     setSelectedImage(filteredImages[index]);
   };
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setSelectedImage(null);
-  };
+  }, []);
 
-  const nextImage = () => {
-    const newIndex = (currentIndex + 1) % filteredImages.length;
-    setCurrentIndex(newIndex);
-    setSelectedImage(filteredImages[newIndex]);
-  };
+  const nextImage = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex + 1) % filteredImages.length;
+      setSelectedImage(filteredImages[newIndex]);
+      return newIndex;
+    });
+  }, [filteredImages]);
 
-  const prevImage = () => {
-    const newIndex = (currentIndex - 1 + filteredImages.length) % filteredImages.length;
-    setCurrentIndex(newIndex);
-    setSelectedImage(filteredImages[newIndex]);
-  };
+  const prevImage = useCallback(() => {
+    setCurrentIndex((prevIndex) => {
+      const newIndex = (prevIndex - 1 + filteredImages.length) % filteredImages.length;
+      setSelectedImage(filteredImages[newIndex]);
+      return newIndex;
+    });
+  }, [filteredImages]);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -57,7 +61,7 @@ const GalleryPage = () => {
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedImage, currentIndex, filteredImages]);
+  }, [selectedImage, nextImage, prevImage, closeLightbox]);
 
   return (
     <motion.div 

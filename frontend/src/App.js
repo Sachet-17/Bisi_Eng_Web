@@ -67,7 +67,7 @@ const AnimatedRoutes = () => {
       // Use instant scroll to avoid blocking
       window.scrollTo({ top: 0, behavior: 'instant' });
     }
-  }, [location.pathname]);
+  }, [location.pathname, location.hash]);
   
   // Handle hash scroll after navigation
   React.useEffect(() => {
