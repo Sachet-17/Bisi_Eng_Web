@@ -1,15 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook, Instagram, ArrowUpRight } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { footerContent } from '../data/mock';
 
 const Footer = () => {
-  const socialIcons = {
-    LinkedIn: Linkedin,
-    Twitter: Twitter,
-    Facebook: Facebook,
-    Instagram: Instagram
-  };
 
   return (
     <footer className="bg-[#0f172a] text-white relative overflow-hidden">
@@ -90,27 +84,10 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-8">
-          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex flex-col md:flex-row items-center justify-center gap-6">
             <p className="text-gray-500 text-sm">
               {footerContent.copyright}
             </p>
-            
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
-              {footerContent.social.map((social, index) => {
-                const Icon = socialIcons[social.name];
-                return (
-                  <a
-                    key={index}
-                    href={social.href}
-                    aria-label={social.name}
-                    className="w-11 h-11 bg-white/5 rounded-xl flex items-center justify-center text-gray-400 hover:bg-[#22C55E] hover:text-white transition-all duration-300 hover:scale-105"
-                  >
-                    <Icon className="w-5 h-5" />
-                  </a>
-                );
-              })}
-            </div>
           </div>
         </div>
       </div>
