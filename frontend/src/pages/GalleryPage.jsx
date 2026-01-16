@@ -72,9 +72,10 @@ const GalleryPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[45vh] flex items-center bg-gradient-to-br from-[#1a2744] via-[#1E3A5F] to-[#1a2744] overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2744]/95 via-[#1a2744]/80 to-[#1a2744]/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
           {/* Decorative elements */}
           <motion.div 
             className="absolute top-20 right-20 w-72 h-72 bg-[#22C55E]/10 rounded-full blur-3xl"
@@ -82,13 +83,13 @@ const GalleryPage = () => {
             transition={{ duration: 8, repeat: Infinity }}
           />
           <motion.div 
-            className="absolute bottom-20 left-20 w-96 h-96 bg-[#22C55E]/5 rounded-full blur-3xl"
+            className="absolute bottom-20 left-20 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
             animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -100,12 +101,12 @@ const GalleryPage = () => {
               </span>
             </motion.div>
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-white leading-[1.15] mb-4"
+              className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-[1.1] mb-6 tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              {galleryPage.hero.title}
+              <span className="text-[#22C55E]">{galleryPage.hero.title.split(' ')[0]}</span> {galleryPage.hero.title.split(' ').slice(1).join(' ')}
             </motion.h1>
             <motion.p 
               className="text-gray-300 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed"

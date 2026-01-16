@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { testimonialsPage } from '../data/mock';
 import { Star, Quote, ArrowRight } from 'lucide-react';
 import { SafeImage } from '../components/common';
-import { FadeInUp, StaggerContainer, StaggerItem } from '../components/animations';
+import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '../components/animations';
 
 const TestimonialsPage = () => {
   return (
@@ -16,9 +16,10 @@ const TestimonialsPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[45vh] flex items-center bg-gradient-to-br from-[#1a2744] via-[#1E3A5F] to-[#1a2744] overflow-hidden">
+      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#1a2744]/95 via-[#1a2744]/80 to-[#1a2744]/60"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
           {/* Decorative elements */}
           <motion.div 
             className="absolute top-20 right-20 w-72 h-72 bg-[#22C55E]/10 rounded-full blur-3xl"
@@ -26,13 +27,13 @@ const TestimonialsPage = () => {
             transition={{ duration: 8, repeat: Infinity }}
           />
           <motion.div 
-            className="absolute bottom-20 left-20 w-96 h-96 bg-[#22C55E]/5 rounded-full blur-3xl"
+            className="absolute bottom-20 left-20 w-96 h-96 bg-[#3B82F6]/5 rounded-full blur-3xl"
             animate={{ scale: [1, 1.3, 1], opacity: [0.2, 0.4, 0.2] }}
             transition={{ duration: 10, repeat: Infinity }}
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-12 lg:py-16">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -44,12 +45,12 @@ const TestimonialsPage = () => {
               </span>
             </motion.div>
             <motion.h1 
-              className="text-4xl md:text-5xl lg:text-[3.5rem] font-light text-white leading-[1.15] mb-4"
+              className="font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-[1.1] mb-6 tracking-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
             >
-              {testimonialsPage.hero.title}
+              <span className="text-[#22C55E]">{testimonialsPage.hero.title.split(' ')[0]}</span> {testimonialsPage.hero.title.split(' ').slice(1).join(' ')}
             </motion.h1>
             <motion.p 
               className="text-gray-300 text-lg lg:text-xl max-w-2xl mx-auto leading-relaxed"
@@ -137,7 +138,7 @@ const TestimonialsPage = () => {
             <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
               By the Numbers
             </span>
-            <h2 className="text-3xl lg:text-4xl font-light text-[#1a2744] mb-3">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
               Client Satisfaction by the Numbers
             </h2>
           </FadeInUp>
@@ -165,55 +166,90 @@ const TestimonialsPage = () => {
       </section>
 
       {/* CTA - Enhanced */}
-      <section className="py-12 lg:py-16 bg-gradient-to-r from-[#22C55E] via-[#16A34A] to-[#22C55E] overflow-hidden relative">
-        {/* Animated background */}
-        <div className="absolute inset-0">
-          <motion.div 
-            className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.3, 1], opacity: [0.3, 0.5, 0.3] }}
-            transition={{ duration: 8, repeat: Infinity }}
-          />
-          <motion.div 
-            className="absolute bottom-10 right-10 w-80 h-80 bg-white/10 rounded-full blur-3xl"
-            animate={{ scale: [1, 1.2, 1], opacity: [0.2, 0.4, 0.2] }}
-            transition={{ duration: 10, repeat: Infinity }}
-          />
-        </div>
-        
-        <FadeInUp className="relative max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <motion.h2 
-            className="text-3xl lg:text-4xl font-light text-white mb-4"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            Ready to experience the difference?
-          </motion.h2>
-          <motion.p 
-            className="text-white/90 text-base lg:text-lg mb-8 max-w-2xl mx-auto"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
-            Join our growing list of satisfied clients and let us bring your vision to life.
-          </motion.p>
-          <Link to="/contact">
-            <motion.span
-              className="group inline-flex items-center gap-3 bg-white text-[#1a2744] px-8 py-4 rounded-full font-medium text-base shadow-xl hover:shadow-2xl"
-              whileHover={{ scale: 1.05, backgroundColor: '#f9fafb' }}
-              whileTap={{ scale: 0.95 }}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
+      <section className="relative overflow-hidden">
+        <div className="grid lg:grid-cols-2">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+            <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
+              <motion.span
+                className="section-label !text-white/80"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.1 }}
+              >
+                Get Started
+              </motion.span>
+              <motion.h2 
+                className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-white leading-tight mb-6 tracking-tight"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+              >
+                Ready to experience the difference?
+              </motion.h2>
+              <motion.p 
+                className="text-white/80 mb-10 leading-relaxed text-lg"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+              >
+                Join our growing list of satisfied clients and let us bring your vision to life.
+              </motion.p>
+              <Link to="/contact">
+                <motion.span
+                  className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                >
+                  Start Your Project
+                  <span className="relative w-5 h-5 overflow-hidden">
+                    <ArrowRight className="w-5 h-5 text-[#22C55E] absolute transition-all duration-300 group-hover:translate-x-6" />
+                    <ArrowRight className="w-5 h-5 text-[#22C55E] absolute transition-all duration-300 -translate-x-6 group-hover:translate-x-0" />
+                  </span>
+                </motion.span>
+              </Link>
+            </div>
+          </FadeInLeft>
+
+          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+            <div className="absolute inset-0">
+              <motion.div 
+                className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"
+                style={{ clipPath: 'polygon(35% 0, 100% 0, 100% 100%, 0 100%)' }}
+                initial={{ x: 100, opacity: 0 }}
+                whileInView={{ x: 0, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.3 }}
+              />
+            </div>
+            
+            <motion.div 
+              className="relative z-10 text-center"
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
             >
-              Start Your Project
-              <ArrowRight className="w-5 h-5 text-[#22C55E] group-hover:translate-x-1 transition-transform" />
-            </motion.span>
-          </Link>
-        </FadeInUp>
+              <motion.div
+                animate={{ rotate: [0, 10, -10, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="mb-6"
+              >
+                <Star className="w-24 h-24 text-white/20 mx-auto" />
+              </motion.div>
+              <div className="text-white/90">
+                <div className="text-5xl lg:text-6xl font-bold mb-2">99%</div>
+                <div className="text-lg font-medium">Client Satisfaction</div>
+              </div>
+            </motion.div>
+          </FadeInRight>
+        </div>
       </section>
     </motion.div>
   );
