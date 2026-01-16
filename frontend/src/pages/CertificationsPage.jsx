@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { certificationsPage } from '../data/mock';
-import { Award, Calendar, Building, ArrowRight, CheckCircle, Shield, FileCheck, X, ZoomIn, FileText } from 'lucide-react';
+import { Award, Calendar, Building, ArrowRight, CheckCircle, Shield, FileCheck, X, ZoomIn, FileText, ChevronLeft, ChevronRight, Clock } from 'lucide-react';
 import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '../components/animations';
 import { SafeImage } from '../components/common';
 
@@ -25,9 +25,14 @@ const getCertificatePdfPath = (cert) => {
 
 const CertificationsPage = () => {
   const [selectedCert, setSelectedCert] = useState(null);
+  const [pdfLoadError, setPdfLoadError] = useState(false);
+  const [isCheckingPdf, setIsCheckingPdf] = useState(true);
+  const certifications = certificationsPage.certifications;
 
   const openModal = (cert) => {
     setSelectedCert(cert);
+    setPdfLoadError(false); // Reset error state when opening new cert
+    setIsCheckingPdf(true); // Start checking
     // Prevent body scroll when modal is open
     document.body.style.overflow = 'hidden';
     
@@ -42,6 +47,78 @@ const CertificationsPage = () => {
     document.body.style.overflow = 'unset';
   }, []);
 
+  const getCurrentIndex = useCallback(() => {
+    if (!selectedCert) return -1;
+    return certifications.findIndex(cert => cert.title === selectedCert.title);
+  }, [selectedCert, certifications]);
+
+  const navigateToPrevious = useCallback(() => {
+    const currentIndex = getCurrentIndex();
+    if (currentIndex === -1) return;
+    
+    const previousIndex = currentIndex === 0 ? certifications.length - 1 : currentIndex - 1;
+    setSelectedCert(certifications[previousIndex]);
+    setPdfLoadError(false); // Reset error state when navigating
+    setIsCheckingPdf(true); // Start checking new PDF
+  }, [getCurrentIndex, certifications]);
+
+  const navigateToNext = useCallback(() => {
+    const currentIndex = getCurrentIndex();
+    if (currentIndex === -1) return;
+    
+    const nextIndex = currentIndex === certifications.length - 1 ? 0 : currentIndex + 1;
+    setSelectedCert(certifications[nextIndex]);
+    setPdfLoadError(false); // Reset error state when navigating
+    setIsCheckingPdf(true); // Start checking new PDF
+  }, [getCurrentIndex, certifications]);
+
+
+  // Check if PDF exists when certificate is selected
+  useEffect(() => {
+    if (!selectedCert) return;
+
+    const checkPdfExists = async () => {
+      setIsCheckingPdf(true);
+      const pdfPath = getCertificatePdfPath(selectedCert);
+      try {
+        const response = await fetch(pdfPath, { method: 'GET' });
+        
+        // Check status
+        if (!response.ok || response.status === 404) {
+          setPdfLoadError(true);
+          setIsCheckingPdf(false);
+          return;
+        }
+        
+        // Check content type
+        const contentType = response.headers.get('content-type') || '';
+        if (contentType && !contentType.includes('application/pdf') && !contentType.includes('application/octet-stream')) {
+          // Might be HTML (SPA fallback) - check first bytes
+          const arrayBuffer = await response.arrayBuffer();
+          const uint8Array = new Uint8Array(arrayBuffer);
+          const firstBytes = String.fromCharCode(...uint8Array.slice(0, 4));
+          
+          // PDF files start with %PDF
+          if (!firstBytes.startsWith('%PDF')) {
+            setPdfLoadError(true);
+          } else {
+            setPdfLoadError(false);
+          }
+        } else {
+          setPdfLoadError(false);
+        }
+      } catch (error) {
+        // If fetch fails, assume PDF doesn't exist
+        console.log('PDF check failed:', error);
+        setPdfLoadError(true);
+      } finally {
+        setIsCheckingPdf(false);
+      }
+    };
+
+    checkPdfExists();
+  }, [selectedCert]);
+
   // Keyboard navigation for modal
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -49,12 +126,18 @@ const CertificationsPage = () => {
       
       if (e.key === 'Escape') {
         closeModal();
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        navigateToPrevious();
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        navigateToNext();
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedCert, closeModal]);
+  }, [selectedCert, closeModal, navigateToPrevious, navigateToNext]);
   return (
     <motion.div 
       className="min-h-screen pt-20"
@@ -131,7 +214,7 @@ const CertificationsPage = () => {
               return (
                 <StaggerItem key={index}>
                   <motion.div 
-                    className="bg-white border border-gray-200 rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer"
+                    className="bg-white border border-gray-200 rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full"
                     whileHover={{ y: -8 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => openModal(cert)}
@@ -145,7 +228,7 @@ const CertificationsPage = () => {
                     role="button"
                     aria-label={`View ${cert.title} certificate`}
                   >
-                    <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center">
+                    <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                       {/* PDF Thumbnail - Show PDF icon with document preview style */}
                       <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
                         <motion.div
@@ -157,7 +240,7 @@ const CertificationsPage = () => {
                           <FileText className="w-20 h-20 text-[#22C55E] group-hover:text-[#16A34A] transition-colors" />
                         </motion.div>
                         <div className="text-center">
-                          <p className="text-sm font-semibold text-gray-700 mb-1">{cert.title}</p>
+                          <p className="text-sm font-semibold text-gray-700 mb-1 line-clamp-2">{cert.title}</p>
                           <p className="text-xs text-gray-500">PDF Document</p>
                         </div>
                       </div>
@@ -182,8 +265,8 @@ const CertificationsPage = () => {
                         </motion.div>
                       </div>
                     </div>
-                    <div className="p-6">
-                      <h3 className="text-xl font-semibold text-[#0f172a] mb-3 group-hover:text-[#22C55E] transition-colors">
+                    <div className="p-6 flex flex-col flex-grow">
+                      <h3 className="text-xl font-semibold text-[#0f172a] mb-3 group-hover:text-[#22C55E] transition-colors line-clamp-2">
                         {cert.title}
                       </h3>
                       <div className="flex flex-wrap gap-3 text-sm text-gray-600 mb-4">
@@ -196,7 +279,7 @@ const CertificationsPage = () => {
                           {cert.year}
                         </span>
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed">
+                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-grow">
                         {cert.description}
                       </p>
                     </div>
@@ -373,7 +456,7 @@ const CertificationsPage = () => {
       <AnimatePresence>
         {selectedCert && (
           <motion.div 
-            className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center p-4"
+            className="fixed inset-0 bg-black/95 z-50 flex flex-col items-center justify-center p-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -392,79 +475,148 @@ const CertificationsPage = () => {
               <X className="w-8 h-8" aria-hidden="true" />
             </motion.button>
 
+            {/* Left Arrow Button */}
+            <motion.button
+              onClick={(e) => { e.stopPropagation(); navigateToPrevious(); }}
+              aria-label="Previous certificate"
+              className="absolute left-6 top-1/2 -translate-y-1/2 text-white hover:text-[#22C55E] transition-colors focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2 rounded-full p-3 bg-black/50 hover:bg-black/70 backdrop-blur-sm z-10"
+              whileHover={{ scale: 1.1, x: -5 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronLeft className="w-8 h-8" aria-hidden="true" />
+            </motion.button>
+
+            {/* Right Arrow Button */}
+            <motion.button
+              onClick={(e) => { e.stopPropagation(); navigateToNext(); }}
+              aria-label="Next certificate"
+              className="absolute right-6 top-1/2 -translate-y-1/2 text-white hover:text-[#22C55E] transition-colors focus:outline-none focus:ring-2 focus:ring-[#22C55E] focus:ring-offset-2 rounded-full p-3 bg-black/50 hover:bg-black/70 backdrop-blur-sm z-10"
+              whileHover={{ scale: 1.1, x: 5 }}
+              whileTap={{ scale: 0.9 }}
+            >
+              <ChevronRight className="w-8 h-8" aria-hidden="true" />
+            </motion.button>
+
             <motion.div 
-              className="max-w-6xl max-h-[90vh] w-full flex flex-col items-center"
+              className="max-w-6xl w-full flex flex-col items-center"
               onClick={(e) => e.stopPropagation()}
               initial={{ scale: 0.9, opacity: 0, y: 20 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
               exit={{ scale: 0.9, opacity: 0, y: 20 }}
               transition={{ duration: 0.3 }}
+              key={selectedCert.title}
             >
+              {/* Certification Name Heading */}
+              <motion.h2 
+                className="text-3xl lg:text-4xl font-semibold text-white mb-6 text-center"
+                initial={{ y: -20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -20, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {selectedCert.title}
+              </motion.h2>
+
               {/* Certificate PDF Viewer */}
-              <div className="bg-white rounded-lg shadow-2xl overflow-hidden mb-4 max-w-full w-full">
-                <div className="w-full relative" style={{ height: '75vh', minHeight: '500px' }}>
-                  {/* Primary: Use embed tag for better PDF support */}
-                  <embed
-                    src={`${getCertificatePdfPath(selectedCert)}#toolbar=1&navpanes=1&scrollbar=1`}
-                    type="application/pdf"
-                    className="w-full h-full"
-                    style={{ minHeight: '500px' }}
-                  />
+              <div className="bg-white rounded-lg shadow-2xl overflow-hidden w-full" style={{ height: '85vh', minHeight: '600px' }}>
+                <div className="w-full h-full relative" key={selectedCert.title}>
+                  {isCheckingPdf ? (
+                    /* Loading state while checking PDF */
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-8">
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-center"
+                      >
+                        <motion.div
+                          animate={{ rotate: 360 }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                          className="mb-6 flex justify-center"
+                        >
+                          <Clock className="w-20 h-20 text-[#22C55E]/60" />
+                        </motion.div>
+                        <p className="text-gray-600 text-lg">Loading...</p>
+                      </motion.div>
+                    </div>
+                  ) : pdfLoadError ? (
+                    /* Fallback UI when PDF is not available */
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-gray-50 to-gray-100 p-8">
+                      <motion.div
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="text-center"
+                      >
+                        <motion.div
+                          animate={{ rotate: [0, 10, -10, 0] }}
+                          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                          className="mb-6 flex justify-center"
+                        >
+                          <Clock className="w-20 h-20 text-[#22C55E]/60" />
+                        </motion.div>
+                        <h3 className="text-2xl font-semibold text-gray-800 mb-3">
+                          Document Coming Soon
+                        </h3>
+                        <p className="text-gray-600 text-lg max-w-md">
+                          This certificate will be uploaded soon. Please check back later.
+                        </p>
+                      </motion.div>
+                    </div>
+                  ) : (
+                    <>
+                      {/* Primary: Use embed tag for better PDF support */}
+                      <embed
+                        key={getCertificatePdfPath(selectedCert)}
+                        src={getCertificatePdfPath(selectedCert)}
+                        type="application/pdf"
+                        className="w-full h-full"
+                        onError={() => setPdfLoadError(true)}
+                      />
+                      
+                      {/* Fallback: Iframe for browsers that don't support embed */}
+                      <iframe
+                        key={getCertificatePdfPath(selectedCert)}
+                        src={getCertificatePdfPath(selectedCert)}
+                        title={selectedCert.title}
+                        className="w-full h-full border-0"
+                        onError={() => setPdfLoadError(true)}
+                        onLoad={(e) => {
+                          // Check if iframe loaded HTML instead of PDF
+                          try {
+                            const iframeDoc = e.target.contentDocument || e.target.contentWindow.document;
+                            if (iframeDoc && iframeDoc.body) {
+                              const bodyText = iframeDoc.body.innerText || '';
+                              // If it's not a PDF viewer, it likely loaded an error page
+                              if (bodyText.includes('404') || bodyText.includes('Not Found') || bodyText.includes('Error')) {
+                                setPdfLoadError(true);
+                              }
+                            }
+                          } catch (err) {
+                            // Cross-origin or other error - assume it's fine if no error event fired
+                          }
+                        }}
+                      />
+                    </>
+                  )}
                   
-                  {/* Fallback: Iframe for browsers that don't support embed */}
-                  <iframe
-                    src={`${getCertificatePdfPath(selectedCert)}#toolbar=1&navpanes=1&scrollbar=1`}
-                    title={selectedCert.title}
-                    className="w-full h-full border-0"
-                    style={{ minHeight: '500px', display: 'none' }}
-                    onLoad={() => {
-                      console.log('PDF loaded:', getCertificatePdfPath(selectedCert));
-                    }}
-                  />
-                  
-                  {/* Always show download button */}
-                  <div className="absolute bottom-4 right-4 z-10">
-                    <a
-                      href={getCertificatePdfPath(selectedCert)}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="bg-[#22C55E] text-white px-4 py-2 rounded-lg hover:bg-[#16A34A] transition-colors text-sm font-medium shadow-lg flex items-center gap-2"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      <FileText className="w-4 h-4" />
-                      Open in New Tab
-                    </a>
-                  </div>
+                  {/* Download button - only show if PDF is loaded */}
+                  {!pdfLoadError && (
+                    <div className="absolute bottom-4 right-4 z-10">
+                      <a
+                        href={getCertificatePdfPath(selectedCert)}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-[#22C55E] text-white px-4 py-2 rounded-lg hover:bg-[#16A34A] transition-colors text-sm font-medium shadow-lg flex items-center gap-2"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <FileText className="w-4 h-4" />
+                        Open in New Tab
+                      </a>
+                    </div>
+                  )}
                 </div>
               </div>
-
-              {/* Certificate Info */}
-              <motion.div 
-                className="text-center bg-white/10 backdrop-blur-sm rounded-lg p-6 max-w-2xl"
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                transition={{ delay: 0.2 }}
-              >
-                <span className="inline-block text-xs bg-[#22C55E] text-white px-3 py-1 rounded-full mb-3 font-semibold">
-                  {selectedCert.category}
-                </span>
-                <h3 className="text-2xl lg:text-3xl font-semibold text-white mb-3">
-                  {selectedCert.title}
-                </h3>
-                <div className="flex flex-wrap gap-4 justify-center text-sm text-white/80 mb-4">
-                  <span className="flex items-center gap-1.5">
-                    <Building className="w-4 h-4 text-[#22C55E]" />
-                    {selectedCert.issuer}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <Calendar className="w-4 h-4 text-[#22C55E]" />
-                    {selectedCert.year}
-                  </span>
-                </div>
-                <p className="text-white/90 text-sm lg:text-base leading-relaxed">
-                  {selectedCert.description}
-                </p>
-              </motion.div>
             </motion.div>
           </motion.div>
         )}
