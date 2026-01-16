@@ -48,7 +48,7 @@ const HomePage = () => {
               transition={{ duration: 0.6, delay: 0.1 }}
             >
               <span className="w-2 h-2 bg-[#22C55E] rounded-full animate-pulse" />
-              <span className="text-white/80 text-sm font-medium">20+ Years of Excellence</span>
+              <span className="text-white/80 text-sm font-medium">27+ Years of Excellence</span>
             </motion.div>
             
             <motion.h1 

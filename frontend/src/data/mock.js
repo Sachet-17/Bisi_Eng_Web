@@ -70,7 +70,7 @@ export const ctaSection = {
   description: 'With over two decades of experience in power plant and industrial construction, we bring your projects to life with precision and expertise.',
   cta: { text: 'Request a quote', href: '/contact' },
   yearsLabel: 'Years of trusted expertise.',
-  yearsValue: '20+',
+  yearsValue: '27+',
   image: '/images/home/cta-bg.jpg'
 };
 
