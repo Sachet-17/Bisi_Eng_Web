@@ -526,7 +526,7 @@ export const certificationsPage = {
       title: 'Boiler Repairer License',
       category: 'IBR License',
       issuer: 'Government of Odisha',
-      year: 'Valid: 2024-2026',
+      year: 'Active',
       description: 'Certificate of Recognition as Boiler Repairer (Special Class for any Boiler Pressure).',
       image: '/images/certifications/boiler-repairer.jpg'
     },
@@ -534,7 +534,7 @@ export const certificationsPage = {
       title: 'Boiler Erector License',
       category: 'IBR License',
       issuer: 'Government of Odisha',
-      year: 'Valid: 2024-2025',
+      year: 'Active',
       description: 'Certificate of Recognition as Boiler Erector under Indian Boiler Regulations.',
       image: '/images/certifications/boiler-erector.jpg'
     },
@@ -553,6 +553,30 @@ export const certificationsPage = {
       year: 'Active',
       description: 'Registered with ESIC for employee state insurance compliance.',
       image: '/images/certifications/esi.jpg'
+    },
+    {
+      title: 'GST Registration',
+      category: 'Tax Compliance',
+      issuer: 'Goods and Services Tax Network',
+      year: 'Active',
+      description: 'Registered under Goods and Services Tax (GST) for tax compliance and business operations.',
+      image: '/images/certifications/gst-registration.jpg'
+    },
+    {
+      title: 'OS & CE License',
+      category: 'Government License',
+      issuer: 'Government of Odisha',
+      year: 'Valid',
+      description: 'Odisha State & Central Excise License for authorized business operations and compliance.',
+      image: '/images/certifications/os-ce-license.jpg'
+    },
+    {
+      title: 'Udyam Registration Certificate',
+      category: 'MSME Registration',
+      issuer: 'Ministry of Micro, Small and Medium Enterprises',
+      year: 'Active',
+      description: 'Registered as Micro, Small and Medium Enterprise (MSME) under Udyam Registration scheme.',
+      image: '/images/certifications/udyam-registration-certificate.jpg'
     }
   ]
 };
