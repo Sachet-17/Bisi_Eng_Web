@@ -134,7 +134,7 @@ const HomePage = () => {
             {statsSection.stats.map((stat, index) => (
               <StaggerItem key={index} className="text-center group">
                 <motion.div 
-                  className="text-4xl lg:text-5xl font-display font-bold text-[#22C55E] mb-3 tracking-tight"
+                  className="text-4xl lg:text-5xl font-display font-bold text-[#22C55E] mb-3 tracking-tight whitespace-nowrap"
                   whileHover={{ scale: 1.05 }}
                   transition={{ type: 'spring', stiffness: 400, damping: 17 }}
                 >
