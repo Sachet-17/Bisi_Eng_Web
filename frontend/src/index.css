@@ -269,3 +269,13 @@ a[href*="emergent-badge"] {
     visibility: hidden !important;
     opacity: 0 !important;
 }
+
+/* Hide scrollbar for scrollable containers */
+.hide-scrollbar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;  /* Chrome, Safari and Opera */
+}

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { aboutPage } from '../data/mock';
-import { Building2, Home, Factory, Landmark, Paintbrush, Wrench, CheckCircle, Users, ArrowRight, Award, Target, Heart, Shield } from 'lucide-react';
+import { Building2, Home, Factory, Landmark, Paintbrush, Wrench, CheckCircle, Users, ArrowRight, Award, Target, Heart, Shield, ChevronLeft, ChevronRight } from 'lucide-react';
 import { SafeImage } from '../components/common';
 import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '../components/animations';
 
@@ -10,6 +10,52 @@ const iconMap = { Building2, Home, Factory, Landmark, Paintbrush, Wrench };
 const valueIcons = { Award, Target, Heart, Shield, CheckCircle, Users };
 
 const AboutPage = () => {
+  const scrollContainerRef = useRef(null);
+  const [showLeftArrow, setShowLeftArrow] = useState(false);
+  const [showRightArrow, setShowRightArrow] = useState(true);
+  const [activeSection, setActiveSection] = useState(0);
+
+  const scroll = (direction) => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const scrollAmount = container.clientWidth;
+      const newScrollLeft = container.scrollLeft + (direction === 'left' ? -scrollAmount : scrollAmount);
+      container.scrollTo({ left: newScrollLeft, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToSection = (sectionIndex) => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const scrollAmount = container.clientWidth * sectionIndex;
+      container.scrollTo({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const handleScroll = () => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      const scrollLeft = container.scrollLeft;
+      const containerWidth = container.clientWidth;
+      const currentSection = Math.round(scrollLeft / containerWidth);
+      
+      setActiveSection(currentSection);
+      setShowLeftArrow(scrollLeft > 0);
+      setShowRightArrow(scrollLeft < container.scrollWidth - container.clientWidth - 10);
+    }
+  };
+
+  useEffect(() => {
+    const container = scrollContainerRef.current;
+    if (container) {
+      handleScroll();
+      // Check on resize
+      const handleResize = () => handleScroll();
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
+  }, []);
+
   return (
     <motion.div 
       className="min-h-screen pt-20"
@@ -71,10 +117,10 @@ const AboutPage = () => {
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
             {[
-              { value: '20+', label: 'Years Experience' },
-              { value: '150+', label: 'Happy Clients' },
-              { value: '500+', label: 'Projects' },
-              { value: '1000+', label: 'Team Members' }
+              { value: '27+', label: 'Years Experience' },
+              { value: '100+', label: "Happy client's" },
+              { value: '100+', label: 'Projects' },
+              { value: '4300+', label: 'Team Members' }
             ].map((stat, index) => (
               <StaggerItem key={index} className="text-center">
                 <motion.div
@@ -126,7 +172,7 @@ const AboutPage = () => {
                   transition={{ delay: 0.4, duration: 0.5, type: 'spring' }}
                   whileHover={{ scale: 1.1, rotate: 5 }}
                 >
-                  <div className="text-3xl font-bold">25+</div>
+                  <div className="text-3xl font-bold">27+</div>
                   <div className="text-xs font-medium">Years Leading</div>
                 </motion.div>
               </div>
@@ -178,61 +224,8 @@ const AboutPage = () => {
         </div>
       </section>
 
-      {/* Capabilities - Enhanced Grid */}
-      <section id="capabilities" className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp className="text-center mb-10 lg:mb-12">
-            <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
-              What We Do
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-light text-[#1a2744] mb-3">
-              {aboutPage.capabilities.title}
-            </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
-              {aboutPage.capabilities.subtitle}
-            </p>
-          </FadeInUp>
-
-          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-            {aboutPage.capabilities.items.map((item, index) => {
-              const Icon = iconMap[item.icon];
-              return (
-                <StaggerItem key={index}>
-                  <motion.div 
-                    className="group relative bg-gradient-to-br from-white to-gray-50 p-6 rounded-2xl border border-gray-100 hover:border-[#22C55E]/30 transition-all duration-300 h-full"
-                    whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    {/* Icon */}
-                    <motion.div 
-                      className="relative mb-4"
-                      initial={{ scale: 1 }}
-                      whileHover={{ scale: 1.1 }}
-                    >
-                      <div className="w-14 h-14 bg-gradient-to-br from-[#22C55E]/10 to-[#22C55E]/5 rounded-xl flex items-center justify-center group-hover:bg-gradient-to-br group-hover:from-[#22C55E] group-hover:to-[#16A34A] transition-all duration-300">
-                        <Icon className="w-7 h-7 text-[#22C55E] group-hover:text-white transition-colors duration-300" />
-                      </div>
-                    </motion.div>
-                    
-                    <h3 className="text-xl font-light text-[#1a2744] mb-2 group-hover:text-[#22C55E] transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {item.description}
-                    </p>
-                    
-                    {/* Hover accent */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#22C55E] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
-                  </motion.div>
-                </StaggerItem>
-              );
-            })}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* Company Values - Split Layout */}
-      <section id="policy" className="py-12 lg:py-16 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
+      {/* Capabilities & Values - Merged Scrollable Section */}
+      <section id="capabilities" className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -241,48 +234,168 @@ const AboutPage = () => {
           }}></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp className="text-center mb-10 lg:mb-12">
-            <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
-              Our Values
-            </span>
-            <h2 className="text-3xl lg:text-4xl font-light text-white mb-3">
-              {aboutPage.policy.title}
-            </h2>
-            <p className="text-gray-300 text-base lg:text-lg max-w-2xl mx-auto">
-              {aboutPage.policy.subtitle}
-            </p>
-          </FadeInUp>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Scrollable Container */}
+          <div className="relative">
+            {/* Scrollable Content - Two Sections */}
+            <div
+              ref={scrollContainerRef}
+              onScroll={handleScroll}
+              className="flex gap-6 md:gap-8 overflow-x-auto pb-4 scroll-smooth hide-scrollbar snap-x snap-mandatory"
+            >
+              {/* Section 1: Capabilities */}
+              <div className="flex-shrink-0 w-full snap-center">
+                <FadeInUp className="text-center mb-6 md:mb-6 lg:mb-8 px-2">
+                  <span className="inline-block text-xs sm:text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-2">
+                    What We Do
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2">
+                    {aboutPage.capabilities.title}
+                  </h2>
+                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+                    {aboutPage.capabilities.subtitle}
+                  </p>
+                </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 lg:gap-6">
-            {aboutPage.policy.policies.map((policy, index) => (
-              <StaggerItem key={index}>
-                <motion.div 
-                  className="group bg-white/10 backdrop-blur-lg border border-white/20 rounded-xl p-5 hover:bg-white/15 transition-all duration-300 h-full"
-                  whileHover={{ y: -5, scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
+                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
+                  {aboutPage.capabilities.items.map((item, index) => {
+                    const Icon = iconMap[item.icon];
+                    return (
+                      <StaggerItem key={index}>
+                        <motion.div 
+                          className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
+                          whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          {/* Icon */}
+                          <motion.div 
+                            className="relative mb-3"
+                            initial={{ scale: 1 }}
+                            whileHover={{ scale: 1.1 }}
+                          >
+                            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#22C55E]/20 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-[#22C55E] transition-all duration-300">
+                              <Icon className="w-5 h-5 sm:w-6 sm:h-6 text-[#22C55E] group-hover:text-white transition-colors duration-300" />
+                            </div>
+                          </motion.div>
+                          
+                          <h3 className="text-base sm:text-lg font-light text-white mb-2 group-hover:text-[#22C55E] transition-colors">
+                            {item.title}
+                          </h3>
+                          <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                            {item.description}
+                          </p>
+                          
+                          {/* Hover accent */}
+                          <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#22C55E] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
+                        </motion.div>
+                      </StaggerItem>
+                    );
+                  })}
+                </StaggerContainer>
+              </div>
+
+              {/* Section 2: Values */}
+              <div className="flex-shrink-0 w-full snap-center">
+                <FadeInUp className="text-center mb-6 md:mb-6 lg:mb-8 px-2">
+                  <span className="inline-block text-xs sm:text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-2">
+                    Our Values
+                  </span>
+                  <h2 className="text-2xl sm:text-3xl lg:text-4xl font-light text-white mb-2">
+                    {aboutPage.policy.title}
+                  </h2>
+                  <p className="text-gray-300 text-sm sm:text-base lg:text-lg max-w-2xl mx-auto">
+                    {aboutPage.policy.subtitle}
+                  </p>
+                </FadeInUp>
+
+                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
+                  {aboutPage.policy.policies.map((policy, index) => (
+                    <StaggerItem key={index}>
+                      <motion.div 
+                        className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
+                        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                        transition={{ duration: 0.3 }}
+                      >
+                        {/* Icon */}
+                        <motion.div 
+                          className="relative mb-3"
+                          initial={{ scale: 1 }}
+                          whileHover={{ scale: 1.1 }}
+                        >
+                          <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#22C55E]/20 rounded-lg sm:rounded-xl flex items-center justify-center group-hover:bg-[#22C55E] transition-all duration-300">
+                            <CheckCircle className="w-5 h-5 sm:w-6 sm:h-6 text-[#22C55E] group-hover:text-white transition-colors duration-300" />
+                          </div>
+                        </motion.div>
+                        
+                        <h3 className="text-base sm:text-lg font-light text-white mb-2 group-hover:text-[#22C55E] transition-colors">
+                          {policy.title}
+                        </h3>
+                        <p className="text-gray-300 text-sm sm:text-base leading-relaxed">
+                          {policy.description}
+                        </p>
+                        
+                        {/* Hover accent */}
+                        <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#22C55E] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-b-2xl"></div>
+                      </motion.div>
+                    </StaggerItem>
+                  ))}
+                </StaggerContainer>
+              </div>
+            </div>
+
+            {/* Bottom Navigation: Tabs and Arrows */}
+            <div className="flex items-center justify-center gap-2 sm:gap-3 md:gap-4 mt-6">
+              {/* Left Arrow */}
+              <motion.button
+                onClick={() => scroll('left')}
+                disabled={!showLeftArrow}
+                className={`bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-300 shadow-lg flex-shrink-0 ${
+                  !showLeftArrow ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                whileHover={showLeftArrow ? { scale: 1.1 } : {}}
+                whileTap={showLeftArrow ? { scale: 0.9 } : {}}
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </motion.button>
+
+              {/* Tabs */}
+              <div className="flex items-center gap-1 sm:gap-2 bg-white/10 backdrop-blur-lg rounded-full px-1.5 sm:px-2 py-1 sm:py-1.5 border border-white/20">
+                <button
+                  onClick={() => scrollToSection(0)}
+                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                    activeSection === 0
+                      ? 'bg-[#22C55E] text-white shadow-lg'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
                 >
-                  <motion.div 
-                    className="flex items-start gap-3"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.2 }}
-                  >
-                    <motion.div 
-                      className="flex-shrink-0 w-9 h-9 bg-[#22C55E]/20 rounded-lg flex items-center justify-center group-hover:bg-[#22C55E] transition-colors duration-300"
-                      whileHover={{ rotate: 360, scale: 1.1 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <CheckCircle className="w-5 h-5 text-[#22C55E] group-hover:text-white transition-colors duration-300" />
-                    </motion.div>
-                    <div className="flex-1">
-                      <h3 className="font-light text-white mb-2">{policy.title}</h3>
-                      <p className="text-gray-300 text-sm leading-relaxed">{policy.description}</p>
-                    </div>
-                  </motion.div>
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                  <span className="hidden sm:inline">Our </span>Capabilities
+                </button>
+                <button
+                  onClick={() => scrollToSection(1)}
+                  className={`px-3 sm:px-4 py-1 sm:py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                    activeSection === 1
+                      ? 'bg-[#22C55E] text-white shadow-lg'
+                      : 'text-white/70 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  <span className="hidden sm:inline">Our </span>Values
+                </button>
+              </div>
+
+              {/* Right Arrow */}
+              <motion.button
+                onClick={() => scroll('right')}
+                disabled={!showRightArrow}
+                className={`bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-2 text-white transition-all duration-300 shadow-lg flex-shrink-0 ${
+                  !showRightArrow ? 'opacity-50 cursor-not-allowed' : ''
+                }`}
+                whileHover={showRightArrow ? { scale: 1.1 } : {}}
+                whileTap={showRightArrow ? { scale: 0.9 } : {}}
+              >
+                <ChevronRight className="w-4 h-4" />
+              </motion.button>
+            </div>
+          </div>
         </div>
       </section>
 
