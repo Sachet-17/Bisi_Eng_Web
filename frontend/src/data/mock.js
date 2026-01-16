@@ -325,71 +325,163 @@ export const teamPage = {
     title: 'Meet Our Team',
     subtitle: 'The talented professionals behind our success'
   },
+  managingDirector: {
+    name: 'Mr. Sukanta Kumar Bisi',
+    position: 'Founder & Managing Director',
+    image: '/images/about/md-photo.jpg',
+    bio: 'Cross-industry business leadership and strategic expertise',
+  },
   leadership: [
     {
-      name: 'Mr. Sukanta Kumar Bisi',
-      position: 'Managing Director',
-      image: '/images/about/md-photo.jpg',
-      bio: '20+ years of business experience across diverse sectors',
-      linkedin: '#',
-      email: 'bisiengineering@ymail.com'
-    },
-    {
-      name: 'Mr. Uttam Ku. Sethy',
-      position: 'GM (Maintenance)',
-      image: '/images/team/member-2.jpg',
+      name: 'Mr. Uttam Kumar Sethi',
+      position: 'GM - Maintenance',
+      image: '/images/team/Uttam.jpg',
       bio: 'Expert in power plant maintenance operations',
-      linkedin: '#',
-      email: 'maintenance@bisiengineering.com'
     },
     {
       name: 'Mr. Purandra Mahanta',
-      position: 'GM (Project)',
-      image: '/images/team/member-3.jpg',
+      position: 'GM – Project',
+      image: '/images/team/Purandra.jpg',
       bio: 'Leading large-scale industrial projects',
-      linkedin: '#',
-      email: 'projects@bisiengineering.com'
+    },
+    {
+      name: 'Mr. Ram Chandra Majhi',
+      position: 'GM - Operations',
+      image: '/images/team/Ram.jpg',
+      bio: 'Operations management and execution excellence',
+    },
+    {
+      name: 'Mr. Akshya Kumar Sahoo',
+      position: 'DGM - Maintenance',
+      image: '/images/team/Akshya.jpg',
+      bio: 'Deputy General Manager for maintenance operations',
+    },
+    {
+      name: 'Mr. Amit Ku. Panda',
+      position: 'Manager – Finance',
+      image: '/images/team/Amit.jpg',
+      bio: 'Financial strategy and management',
+    },
+    {
+      name: 'Mr. Jitendra Kumar Sethi',
+      position: 'Senior Accountant',
+      image: '/images/team/Jitendra.jpg',
+      bio: 'Senior accounting and financial operations',
+    },
+    {
+      name: 'Mr. Rajesh Naik',
+      position: 'Manager - HR/Admin/Tax',
+      image: '/images/team/Rajesh.jpg',
+      bio: 'Human resources, administration and tax management',
     },
     {
       name: 'Mr. Pullak Kumar Dalai',
-      position: 'Manager (HR & Admin)',
-      image: '/images/team/member-4.jpg',
-      bio: 'Building our world-class workforce',
-      linkedin: '#',
-      email: 'hr@bisiengineering.com'
+      position: 'Manager – Liaisoning/TPI',
+      image: '/images/team/Pullak.jpg',
+      bio: 'Liaisoning and third party inspection coordination',
     },
     {
-      name: 'Mr. Amitt Ku. Panda',
-      position: 'Manager Finance',
-      image: '/images/team/member-5.jpg',
-      bio: 'Financial strategy and management',
-      linkedin: '#',
-      email: 'finance@bisiengineering.com'
+      name: 'Mr. Nihar Ranjan Pradhan',
+      position: 'Purchase/Procurement Head',
+      image: '/images/team/Nihar.jpg',
+      bio: 'Leading procurement and purchase operations',
     },
     {
-      name: 'Mr. Naufal Kabeer',
-      position: 'Manager Welding, QA/QC',
-      image: '/images/team/member-6.jpg',
-      bio: 'Ensuring quality in every weld',
-      linkedin: '#',
-      email: 'qaqc@bisiengineering.com'
+      name: 'Mr. Nilachal Pradhan',
+      position: 'Assist to Mr.Nihar (Purchase/Procurement)',
+      image: '/images/team/Nilachal.jpg',
+      bio: 'Supporting procurement and purchase operations',
+    },
+  ],
+  siteExecutives: [
+    {
+      name: 'Mr. Jagannath Behera',
+      position: 'Site Executive AOH - Hindalco',
+      image: '/images/team/Jagannath.jpg',
+      bio: 'Site executive for annual overhauling at Hindalco',
     },
     {
-      name: 'Mr. Rajesh Nayak',
-      position: 'Manager Contract & Commercial',
-      image: '/images/team/member-7.jpg',
-      bio: 'Contract management and commercial operations',
-      linkedin: '#',
-      email: 'contracts@bisiengineering.com'
+      name: 'Mr. Santosh Dash',
+      position: 'Site Executive - JSPL',
+      image: '/images/team/Santosh.jpg',
+      bio: 'Site executive at Jindal Steel & Power Limited',
     },
     {
-      name: 'Mr. Lalat Mangaraj',
-      position: 'Manager HSE',
-      image: '/images/team/member-8.jpg',
-      bio: 'Health, Safety & Environment excellence',
-      linkedin: '#',
-      email: 'hse@bisiengineering.com'
-    }
+      name: 'Mr. Gayadhar Naik',
+      position: 'Site Executive - Shyam Metalic',
+      image: '/images/team/Gayadhar.jpg',
+      bio: 'Site executive at Shyam Metalic',
+    },
+    {
+      name: 'Sk Asmanuddin',
+      position: 'Site Executive - Rungta Sons',
+      image: '/images/team/Asmanuddin.jpg',
+      bio: 'Site executive at Rungta Sons',
+    },
+    {
+      name: 'Mr. Kishore Kumar Behera',
+      position: 'Site Executive - Operations',
+      image: '/images/team/Kishore.jpg',
+      bio: 'Site executive for operations',
+    },
+    {
+      name: 'Mr. S K Gulam Nazif',
+      position: 'Site Executive Maintenance - Hindalco',
+      image: '/images/team/Nazif.jpg',
+      bio: 'Site executive for maintenance at Hindalco',
+    },
+    {
+      name: 'Mr. Achuyatanand Das',
+      position: 'Site Executive',
+      image: '/images/team/Achuyatanand.jpg',
+      bio: 'Site executive for project execution',
+    },
+    {
+      name: 'Kabiraj Suna',
+      position: 'Site Executive - ACC Cement',
+      image: '/images/team/Kabiraj.jpg',
+      bio: 'Site executive at ACC Cement',
+    },
+  ],
+  assistantSiteExecutives: [
+    {
+      name: 'Mr. Mohan Patel',
+      position: 'Asst. Site Executive - JSW',
+      image: '/images/team/Mohan.jpg',
+      bio: 'Assistant site executive at JSW',
+    },
+    {
+      name: 'Mr. Subasish Sethi',
+      position: 'Asst. Site Executive - Shyam Metalic',
+      image: '/images/team/Subasish.jpg',
+      bio: 'Assistant site executive at Shyam Metalic',
+    },
+    {
+      name: 'Mr. Biswa Meher',
+      position: 'Asst. Site Executive - Aditya Birla',
+      image: '/images/team/Biswa.jpg',
+      bio: 'Assistant site executive at Aditya Birla',
+    },
+    {
+      name: 'Mr. Salil Kumar Behera',
+      position: 'Asst. Site Executive AOH - Hindalco',
+      image: '/images/team/Salil.jpg',
+      bio: 'Assistant site executive for annual overhauling at Hindalco',
+    },
+  ],
+  officeStaff: [
+    {
+      name: 'Mr. Ajay Kumar Pradhan',
+      position: 'Office Assistant',
+      image: '/images/team/Ajay.jpg',
+      bio: 'Office administration and support',
+    },
+    {
+      name: 'Mr. Manchan Bariha',
+      position: 'Office Assistant',
+      image: '/images/team/Manchan.jpg',
+      bio: 'Office administration and support',
+    },
   ],
   technicalStaff: {
     title: 'Our Technical Strength',

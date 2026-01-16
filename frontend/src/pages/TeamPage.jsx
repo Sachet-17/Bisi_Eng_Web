@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { teamPage } from '../data/mock';
-import { Linkedin, Mail, ArrowRight } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { SafeImage } from '../components/common';
 import { FadeInUp, StaggerContainer, StaggerItem } from '../components/animations';
 
@@ -62,13 +62,62 @@ const TeamPage = () => {
         </div>
       </section>
 
-      {/* Leadership Team */}
+      {/* Managing Director */}
       <section className="py-20 lg:py-28 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <FadeInUp onLoad={true} className="text-center mb-16">
             <span className="section-label">Leadership</span>
             <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
-              Our Leadership Team
+              Managing Director
+            </h2>
+          </FadeInUp>
+
+          <div className="max-w-md">
+            <motion.div 
+              className="group bg-white rounded-2xl overflow-hidden shadow-soft"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+            >
+              <div className="relative h-96 overflow-hidden">
+                <motion.div
+                  className="w-full h-full"
+                  whileHover={{ scale: 1.08 }}
+                  transition={{ duration: 0.4 }}
+                >
+                  <SafeImage
+                    src={teamPage.managingDirector.image}
+                    alt={teamPage.managingDirector.name}
+                    className="w-full h-full"
+                    aspectRatio="aspect-[4/5]"
+                    placeholderLabel={teamPage.managingDirector.name}
+                  />
+                </motion.div>
+              </div>
+              <div className="p-7">
+                <h3 className="font-display text-2xl font-semibold text-[#0f172a] tracking-tight mb-2">
+                  {teamPage.managingDirector.name}
+                </h3>
+                <p className="text-[#22C55E] text-base font-semibold mb-4">
+                  {teamPage.managingDirector.position}
+                </p>
+                <p className="text-gray-500 text-base leading-relaxed">
+                  {teamPage.managingDirector.bio}
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership & Management */}
+      <section className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <FadeInUp onLoad={true} className="text-center mb-16">
+            <span className="section-label">Management</span>
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+              Admin and Management Team
             </h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
               Experienced professionals dedicated to delivering excellence in every project.
@@ -97,34 +146,167 @@ const TeamPage = () => {
                         placeholderLabel={member.name}
                       />
                     </motion.div>
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"
-                      initial={{ opacity: 0 }}
-                      whileHover={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                    <motion.div 
-                      className="absolute bottom-5 left-5 right-5 flex gap-3"
-                      initial={{ opacity: 0, y: 20 }}
-                      whileHover={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.3 }}
+                  </div>
+                  <div className="p-7">
+                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                      {member.position}
+                    </p>
+                    <p className="text-gray-500 text-base leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Site Executives */}
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <FadeInUp onLoad={true} className="text-center mb-16">
+            <span className="section-label">Operations</span>
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+              Site Executives
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+              Our dedicated site executives ensuring smooth operations across all project locations.
+            </p>
+          </FadeInUp>
+
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            {teamPage.siteExecutives.map((member, index) => (
+              <StaggerItem key={index}>
+                <motion.div 
+                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative h-80 overflow-hidden">
+                    <motion.div
+                      className="w-full h-full"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.4 }}
                     >
-                      <motion.a 
-                        href={member.linkedin}
-                        className="w-11 h-11 bg-white rounded-xl flex items-center justify-center text-[#0f172a]"
-                        whileHover={{ scale: 1.1, backgroundColor: '#22C55E', color: '#fff' }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Linkedin className="w-5 h-5" />
-                      </motion.a>
-                      <motion.a 
-                        href={`mailto:${member.email}`}
-                        className="w-11 h-11 bg-white rounded-xl flex items-center justify-center text-[#0f172a]"
-                        whileHover={{ scale: 1.1, backgroundColor: '#22C55E', color: '#fff' }}
-                        whileTap={{ scale: 0.9 }}
-                      >
-                        <Mail className="w-5 h-5" />
-                      </motion.a>
+                      <SafeImage
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full"
+                        aspectRatio="aspect-[4/5]"
+                        placeholderLabel={member.name}
+                      />
+                    </motion.div>
+                  </div>
+                  <div className="p-7">
+                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                      {member.position}
+                    </p>
+                    <p className="text-gray-500 text-base leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Assistant Site Executives */}
+      <section className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <FadeInUp onLoad={true} className="text-center mb-16">
+            <span className="section-label">Operations</span>
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+              Assistant Site Executives
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+              Supporting our site operations with dedication and expertise.
+            </p>
+          </FadeInUp>
+
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+            {teamPage.assistantSiteExecutives.map((member, index) => (
+              <StaggerItem key={index}>
+                <motion.div 
+                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative h-80 overflow-hidden">
+                    <motion.div
+                      className="w-full h-full"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <SafeImage
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full"
+                        aspectRatio="aspect-[4/5]"
+                        placeholderLabel={member.name}
+                      />
+                    </motion.div>
+                  </div>
+                  <div className="p-7">
+                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                      {member.name}
+                    </h3>
+                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                      {member.position}
+                    </p>
+                    <p className="text-gray-500 text-base leading-relaxed">
+                      {member.bio}
+                    </p>
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
+      {/* Office Staff */}
+      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+          <FadeInUp onLoad={true} className="text-center mb-16">
+            <span className="section-label">Support</span>
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+              Office Staff
+            </h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
+              Our administrative team providing essential support for smooth operations.
+            </p>
+          </FadeInUp>
+
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-5xl mx-auto">
+            {teamPage.officeStaff.map((member, index) => (
+              <StaggerItem key={index}>
+                <motion.div 
+                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="relative h-80 overflow-hidden">
+                    <motion.div
+                      className="w-full h-full"
+                      whileHover={{ scale: 1.08 }}
+                      transition={{ duration: 0.4 }}
+                    >
+                      <SafeImage
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full"
+                        aspectRatio="aspect-[4/5]"
+                        placeholderLabel={member.name}
+                      />
                     </motion.div>
                   </div>
                   <div className="p-7">
