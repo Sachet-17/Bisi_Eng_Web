@@ -99,7 +99,7 @@ const ContactPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center bg-gradient-to-br from-[#0f172a] via-[#1E3A5F] to-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[30vh] flex items-center bg-gradient-to-br from-[#0f172a] via-[#1E3A5F] to-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/60"></div>
           <motion.div 
@@ -114,7 +114,7 @@ const ContactPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-24">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-8 lg:py-10">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -146,35 +146,49 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Section */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-3 gap-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp className="text-center mb-6">
+            <p className="text-gray-600 text-sm lg:text-base max-w-3xl mx-auto leading-relaxed">
+              We're here to help you with your project needs. Whether you have questions about our services, need a quote, or want to discuss a potential project, our team is ready to assist you.
+            </p>
+          </FadeInUp>
+          <div className="grid lg:grid-cols-3 gap-6 lg:gap-8">
             {/* Contact Info */}
             <FadeInLeft className="lg:col-span-1">
-              <h2 className="font-display text-3xl font-semibold text-[#0f172a] mb-6 tracking-tight">
+              <h2 className="font-display text-2xl lg:text-3xl font-semibold text-[#0f172a] mb-4 tracking-tight">
                 Get in Touch
               </h2>
-              <p className="text-gray-600 mb-10 text-lg leading-relaxed">
+              <p className="text-gray-600 mb-5 text-sm lg:text-base leading-relaxed">
                 Have a project in mind? We'd love to hear from you. Contact us using the form or reach out directly.
               </p>
+              <div className="bg-[#22C55E]/10 rounded-lg p-3 mb-5 border-l-4 border-[#22C55E]">
+                <p className="text-gray-700 text-xs lg:text-sm font-medium mb-2">Why Contact Us?</p>
+                <ul className="text-gray-600 text-xs lg:text-sm space-y-1">
+                  <li>• Free consultation and project assessment</li>
+                  <li>• Quick response within 24 hours</li>
+                  <li>• Expert advice from experienced engineers</li>
+                  <li>• Transparent pricing and timelines</li>
+                </ul>
+              </div>
 
-              <StaggerContainer staggerDelay={0.1} className="space-y-8">
+              <StaggerContainer staggerDelay={0.1} className="space-y-4">
                 {contactInfo.map((item, index) => (
                   <StaggerItem key={index}>
                     <motion.div 
-                      className="flex gap-5"
+                      className="flex gap-4"
                       whileHover={{ x: 5 }}
                       transition={{ duration: 0.2 }}
                     >
                       <motion.div 
-                        className="w-14 h-14 bg-[#22C55E]/10 rounded-2xl flex items-center justify-center flex-shrink-0"
+                        className="w-12 h-12 bg-[#22C55E]/10 rounded-xl flex items-center justify-center flex-shrink-0"
                         whileHover={{ backgroundColor: '#22C55E', scale: 1.05 }}
                         transition={{ duration: 0.3 }}
                       >
-                        <item.icon className="w-6 h-6 text-[#22C55E]" />
+                        <item.icon className="w-5 h-5 text-[#22C55E]" />
                       </motion.div>
                       <div>
-                        <h3 className="font-semibold text-[#0f172a] text-lg mb-1">{item.title}</h3>
+                        <h3 className="font-semibold text-[#0f172a] text-base lg:text-lg mb-1">{item.title}</h3>
                         {item.href ? (
                           <a href={item.href} className="text-gray-600 hover:text-[#22C55E] transition-colors">
                             {item.value}
@@ -192,7 +206,7 @@ const ContactPage = () => {
             {/* Contact Form */}
             <FadeInRight className="lg:col-span-2">
               <motion.div 
-                className="bg-gray-50 rounded-3xl p-8 lg:p-12"
+                className="bg-gray-50 rounded-2xl p-6 lg:p-8"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
@@ -219,8 +233,8 @@ const ContactPage = () => {
                     </p>
                   </motion.div>
                 ) : (
-                  <form onSubmit={handleSubmit} className="space-y-8">
-                    <div className="grid md:grid-cols-2 gap-6">
+                  <form onSubmit={handleSubmit} className="space-y-5">
+                    <div className="grid md:grid-cols-2 gap-4">
                       {[
                         { name: 'name', label: 'Full Name', type: 'text', placeholder: 'John Doe', required: true },
                         { name: 'email', label: 'Email Address', type: 'email', placeholder: 'john@example.com', required: true }
@@ -230,7 +244,7 @@ const ContactPage = () => {
                           animate={{ scale: focusedField === field.name ? 1.01 : 1 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                          <label className="block text-xs lg:text-sm font-semibold text-[#0f172a] mb-2">
                             {field.label} {field.required && <span className="text-[#22C55E]">*</span>}
                           </label>
                           <input
@@ -246,7 +260,7 @@ const ContactPage = () => {
                             required={field.required}
                             aria-invalid={errors[field.name] ? 'true' : 'false'}
                             aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
-                            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                            className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-sm lg:text-base ${
                               errors[field.name] ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                             }`}
                             placeholder={field.placeholder}
@@ -260,7 +274,7 @@ const ContactPage = () => {
                       ))}
                     </div>
 
-                    <div className="grid md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-4">
                       {[
                         { name: 'phone', label: 'Phone Number', type: 'tel', placeholder: '+1 (555) 000-0000' },
                         { name: 'company', label: 'Company', type: 'text', placeholder: 'Your Company' }
@@ -270,7 +284,7 @@ const ContactPage = () => {
                           animate={{ scale: focusedField === field.name ? 1.01 : 1 }}
                           transition={{ duration: 0.2 }}
                         >
-                          <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                          <label className="block text-xs lg:text-sm font-semibold text-[#0f172a] mb-2">
                             {field.label}
                           </label>
                           <input
@@ -285,7 +299,7 @@ const ContactPage = () => {
                             }}
                             aria-invalid={errors[field.name] ? 'true' : 'false'}
                             aria-describedby={errors[field.name] ? `${field.name}-error` : undefined}
-                            className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                            className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-sm lg:text-base ${
                               errors[field.name] ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                             }`}
                             placeholder={field.placeholder}
@@ -303,7 +317,7 @@ const ContactPage = () => {
                       animate={{ scale: focusedField === 'subject' ? 1.01 : 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                      <label className="block text-xs lg:text-sm font-semibold text-[#0f172a] mb-2">
                         Subject <span className="text-[#22C55E]">*</span>
                       </label>
                       <input
@@ -319,7 +333,7 @@ const ContactPage = () => {
                         required
                         aria-invalid={errors.subject ? 'true' : 'false'}
                         aria-describedby={errors.subject ? 'subject-error' : undefined}
-                        className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-base ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-0 focus:border-[#22C55E] outline-none transition-all text-sm lg:text-base ${
                           errors.subject ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         placeholder="How can we help you?"
@@ -335,7 +349,7 @@ const ContactPage = () => {
                       animate={{ scale: focusedField === 'message' ? 1.01 : 1 }}
                       transition={{ duration: 0.2 }}
                     >
-                      <label className="block text-sm font-semibold text-[#0f172a] mb-3">
+                      <label className="block text-xs lg:text-sm font-semibold text-[#0f172a] mb-2">
                         Message <span className="text-[#22C55E]">*</span>
                       </label>
                       <textarea
@@ -348,10 +362,10 @@ const ContactPage = () => {
                           handleBlur('message');
                         }}
                         required
-                        rows={5}
+                        rows={4}
                         aria-invalid={errors.message ? 'true' : 'false'}
                         aria-describedby={errors.message ? 'message-error' : undefined}
-                        className={`w-full px-5 py-4 border-2 rounded-xl focus:ring-0 focus:border-[#22C55E] outline-none transition-all resize-none text-base ${
+                        className={`w-full px-4 py-3 border-2 rounded-lg focus:ring-0 focus:border-[#22C55E] outline-none transition-all resize-none text-sm lg:text-base ${
                           errors.message ? 'border-red-300' : 'border-gray-200 hover:border-gray-300'
                         }`}
                         placeholder="Tell us about your project..."
@@ -382,7 +396,7 @@ const ContactPage = () => {
 
       {/* Map Placeholder */}
       <motion.section 
-        className="h-[450px] bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden"
+        className="h-[300px] lg:h-[350px] bg-gradient-to-br from-gray-100 to-gray-200 relative overflow-hidden"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}

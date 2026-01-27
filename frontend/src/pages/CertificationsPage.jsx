@@ -147,7 +147,7 @@ const CertificationsPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -164,7 +164,7 @@ const CertificationsPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -195,27 +195,58 @@ const CertificationsPage = () => {
         </div>
       </section>
 
+      {/* Certification Stats */}
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {[
+              { value: '7+', label: 'Active Certifications' },
+              { value: 'ISO', label: '9001 & 45001' },
+              { value: '100%', label: 'Compliance Rate' },
+              { value: 'IBR', label: 'Licensed' }
+            ].map((stat, index) => (
+              <StaggerItem key={index} className="text-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-[#22C55E] mb-1 tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs lg:text-sm text-gray-600 font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Certifications Grid */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Our Credentials</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Industry-Recognized Certifications
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto">
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto mb-3">
               Our certifications reflect our commitment to quality, safety, and excellence in every project we undertake.
+            </p>
+            <p className="text-gray-500 text-xs lg:text-sm max-w-2xl mx-auto">
+              We maintain active certifications from leading regulatory bodies, ensuring compliance with national and international standards across all our operations.
             </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {certificationsPage.certifications.map((cert, index) => {
               const pdfPath = getCertificatePdfPath(cert);
               return (
                 <StaggerItem key={index}>
                   <motion.div 
-                    className="bg-white border border-gray-200 rounded-xl overflow-hidden group shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer flex flex-col h-full"
-                    whileHover={{ y: -8 }}
+                    className="bg-white border border-gray-200 rounded-lg overflow-hidden group shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer flex flex-col h-full"
+                    whileHover={{ y: -5 }}
                     transition={{ duration: 0.3 }}
                     onClick={() => openModal(cert)}
                     onKeyDown={(e) => {
@@ -228,7 +259,7 @@ const CertificationsPage = () => {
                     role="button"
                     aria-label={`View ${cert.title} certificate`}
                   >
-                    <div className="relative h-56 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center flex-shrink-0">
+                    <div className="relative h-48 bg-gradient-to-br from-gray-50 to-gray-100 overflow-hidden flex items-center justify-center flex-shrink-0">
                       {/* PDF Thumbnail - Show PDF icon with document preview style */}
                       <div className="w-full h-full flex flex-col items-center justify-center p-6 bg-gradient-to-br from-blue-50 to-indigo-50">
                         <motion.div
@@ -265,11 +296,11 @@ const CertificationsPage = () => {
                         </motion.div>
                       </div>
                     </div>
-                    <div className="p-6 flex flex-col flex-grow">
-                      <h3 className="text-xl font-semibold text-[#0f172a] mb-3 group-hover:text-[#22C55E] transition-colors line-clamp-2">
+                    <div className="p-4 lg:p-5 flex flex-col flex-grow">
+                      <h3 className="text-lg lg:text-xl font-semibold text-[#0f172a] mb-2 group-hover:text-[#22C55E] transition-colors line-clamp-2">
                         {cert.title}
                       </h3>
-                      <div className="flex flex-wrap gap-3 text-sm text-gray-600 mb-4">
+                      <div className="flex flex-wrap gap-2 text-xs lg:text-sm text-gray-600 mb-3">
                         <span className="flex items-center gap-1.5">
                           <Building className="w-4 h-4 text-[#22C55E]" />
                           <span className="line-clamp-1">{cert.issuer}</span>
@@ -279,7 +310,7 @@ const CertificationsPage = () => {
                           {cert.year}
                         </span>
                       </div>
-                      <p className="text-gray-600 text-sm leading-relaxed line-clamp-3 flex-grow">
+                      <p className="text-gray-600 text-xs lg:text-sm leading-relaxed line-clamp-3 flex-grow">
                         {cert.description}
                       </p>
                     </div>
@@ -292,41 +323,42 @@ const CertificationsPage = () => {
       </section>
 
       {/* Why It Matters */}
-      <section className="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+      <section className="py-8 lg:py-10 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
             <FadeInLeft onLoad={true}>
               <span className="section-label">Quality Assurance</span>
-              <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-6 tracking-tight">
+              <h2 className="font-display text-2xl lg:text-3xl xl:text-4xl font-semibold text-[#0f172a] mb-4 tracking-tight">
                 Why Our Certifications Matter
               </h2>
-              <p className="text-gray-600 mb-8 text-lg leading-relaxed">
+              <p className="text-gray-600 mb-5 text-sm lg:text-base leading-relaxed">
                 Our certifications are more than just credentials—they represent our unwavering commitment to excellence, safety, and environmental responsibility.
               </p>
-              <StaggerContainer staggerDelay={0.1} onLoad={true} className="space-y-5">
+              <StaggerContainer staggerDelay={0.1} onLoad={true} className="space-y-3">
                 {[
                   { text: 'Verified quality management systems', icon: FileCheck },
                   { text: 'Rigorous safety protocols and training', icon: Shield },
                   { text: 'Environmental compliance and sustainability', icon: CheckCircle },
                   { text: 'Continuous improvement and innovation', icon: Award },
-                  { text: 'Industry-leading best practices', icon: CheckCircle }
+                  { text: 'Industry-leading best practices', icon: CheckCircle },
+                  { text: 'Regular audits and compliance monitoring', icon: CheckCircle }
                 ].map((item, index) => {
                   const IconComponent = item.icon;
                   return (
                     <StaggerItem key={index}>
                       <motion.div 
-                        className="flex items-center gap-4 p-3 rounded-lg hover:bg-white transition-colors"
+                        className="flex items-center gap-3 p-2 rounded-lg hover:bg-white transition-colors"
                         whileHover={{ x: 5 }}
                         transition={{ duration: 0.2 }}
                       >
                         <motion.span
-                          className="flex-shrink-0 w-10 h-10 bg-[#22C55E]/10 rounded-lg flex items-center justify-center"
+                          className="flex-shrink-0 w-9 h-9 bg-[#22C55E]/10 rounded-lg flex items-center justify-center"
                           whileHover={{ scale: 1.1, rotate: 5 }}
                           transition={{ duration: 0.3 }}
                         >
-                          <IconComponent className="w-5 h-5 text-[#22C55E]" />
+                          <IconComponent className="w-4 h-4 text-[#22C55E]" />
                         </motion.span>
-                        <span className="text-gray-700 font-medium">{item.text}</span>
+                        <span className="text-gray-700 text-sm lg:text-base font-medium">{item.text}</span>
                       </motion.div>
                     </StaggerItem>
                   );
@@ -368,7 +400,7 @@ const CertificationsPage = () => {
       {/* CTA - Enhanced */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-12 lg:py-14 px-6 lg:px-12 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -389,7 +421,7 @@ const CertificationsPage = () => {
                 Work with a certified partner
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-4 leading-relaxed text-sm lg:text-base"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -397,6 +429,26 @@ const CertificationsPage = () => {
               >
                 Trust your project to a team with proven expertise and recognized credentials.
               </motion.p>
+              <motion.ul 
+                className="space-y-2 mb-8 text-white/90 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>ISO 9001:2015 Quality Management System</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>ISO 45001:2018 Occupational Health & Safety</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>IBR Licensed Boiler Erector & Repairer</span>
+                </li>
+              </motion.ul>
               <Link to="/contact">
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -417,7 +469,7 @@ const CertificationsPage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+          <FadeInRight className="relative min-h-[350px] lg:min-h-[400px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
             <div className="absolute inset-0">
               <motion.div 
                 className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"

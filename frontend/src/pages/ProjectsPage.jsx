@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { projectsPage } from '../data/mock';
 import { MapPin, Calendar, DollarSign, ArrowRight } from 'lucide-react';
 import { SafeImage } from '../components/common';
-import { FadeInUp, FadeInLeft, FadeInRight } from '../components/animations';
+import { FadeInUp, FadeInLeft, FadeInRight, StaggerContainer, StaggerItem } from '../components/animations';
 
 const ProjectsPage = () => {
   const [activeCategory, setActiveCategory] = useState('All');
@@ -27,7 +27,7 @@ const ProjectsPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -44,7 +44,7 @@ const ProjectsPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -75,11 +75,39 @@ const ProjectsPage = () => {
         </div>
       </section>
 
+      {/* Projects Stats */}
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {[
+              { value: '100+', label: 'Projects Completed' },
+              { value: '800+ cr', label: 'Work Executed' },
+              { value: '15+', label: 'Years Active' },
+              { value: '100%', label: 'Client Satisfaction' }
+            ].map((stat, index) => (
+              <StaggerItem key={index} className="text-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-[#22C55E] mb-1 tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs lg:text-sm text-gray-600 font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Filter Tabs */}
-      <section className="py-10 bg-white border-b border-gray-100 sticky top-[72px] z-40 backdrop-blur-lg bg-white/95">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-4 bg-white border-b border-gray-100 sticky top-[72px] z-40 backdrop-blur-lg bg-white/95">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <motion.div 
-            className="flex flex-wrap gap-3 justify-center"
+            className="flex flex-wrap gap-2 justify-center"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
@@ -88,7 +116,7 @@ const ProjectsPage = () => {
               <motion.button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-6 py-3 rounded-full text-sm font-semibold transition-all relative ${
+                className={`px-4 py-2 rounded-full text-xs lg:text-sm font-semibold transition-all relative ${
                   activeCategory === category
                     ? 'text-white'
                     : 'text-gray-600 hover:bg-gray-100'
@@ -111,10 +139,15 @@ const ProjectsPage = () => {
       </section>
 
       {/* Projects Grid */}
-      <section className="py-20 lg:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-8 lg:py-10 bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp className="text-center mb-6">
+            <p className="text-gray-600 text-sm lg:text-base max-w-3xl mx-auto leading-relaxed">
+              Explore our portfolio of successful projects across power generation, industrial facilities, and infrastructure development. Each project showcases our commitment to quality, safety, and timely delivery.
+            </p>
+          </FadeInUp>
           <motion.div 
-            className="grid md:grid-cols-2 lg:grid-cols-3 gap-10"
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6"
             layout
           >
             <AnimatePresence mode="popLayout">
@@ -126,13 +159,13 @@ const ProjectsPage = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="bg-white rounded-2xl overflow-hidden shadow-soft group"
+                  className="bg-white rounded-xl overflow-hidden shadow-soft group"
                   whileHover={{ 
-                    y: -8,
-                    boxShadow: '0 25px 50px rgba(0,0,0,0.12)'
+                    y: -5,
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.12)'
                   }}
                 >
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative h-56 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
@@ -151,14 +184,14 @@ const ProjectsPage = () => {
                       </span>
                     </div>
                   </div>
-                  <div className="p-7">
-                    <h3 className="font-display text-xl font-semibold text-[#0f172a] mb-3 tracking-tight">
+                  <div className="p-4 lg:p-5">
+                    <h3 className="font-display text-lg lg:text-xl font-semibold text-[#0f172a] mb-2 tracking-tight">
                       {project.title}
                     </h3>
-                    <p className="text-gray-600 text-base mb-5 leading-relaxed">
+                    <p className="text-gray-600 text-sm lg:text-base mb-3 leading-relaxed">
                       {project.description}
                     </p>
-                    <div className="flex flex-wrap gap-4 text-sm text-gray-500 mb-5">
+                    <div className="flex flex-wrap gap-2 text-xs lg:text-sm text-gray-500 mb-3">
                       <span className="flex items-center gap-1.5">
                         <MapPin className="w-4 h-4" />
                         {project.location}
@@ -190,7 +223,7 @@ const ProjectsPage = () => {
       {/* CTA - Enhanced */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-12 lg:py-14 px-6 lg:px-12 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -211,14 +244,34 @@ const ProjectsPage = () => {
                 Have a project in mind?
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-4 leading-relaxed text-sm lg:text-base"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                Let's discuss how we can bring your vision to reality.
+                Let's discuss how we can bring your vision to reality. Our proven track record and expertise ensure your project will be completed to the highest standards.
               </motion.p>
+              <motion.ul 
+                className="space-y-2 mb-8 text-white/90 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>100+ projects successfully completed</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>On-time delivery with quality assurance</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Comprehensive project management</span>
+                </li>
+              </motion.ul>
               <Link to="/contact">
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -239,7 +292,7 @@ const ProjectsPage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+          <FadeInRight className="relative min-h-[350px] lg:min-h-[400px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
             <div className="absolute inset-0">
               <motion.div 
                 className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"

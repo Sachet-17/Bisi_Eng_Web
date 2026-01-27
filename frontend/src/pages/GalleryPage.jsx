@@ -72,7 +72,7 @@ const GalleryPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -89,7 +89,7 @@ const GalleryPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -120,9 +120,37 @@ const GalleryPage = () => {
         </div>
       </section>
 
+      {/* Gallery Stats */}
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {[
+              { value: '100+', label: 'Projects Documented' },
+              { value: '15+', label: 'Years of History' },
+              { value: 'Multiple', label: 'Industry Sectors' },
+              { value: '4+', label: 'Categories' }
+            ].map((stat, index) => (
+              <StaggerItem key={index} className="text-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-[#22C55E] mb-1 tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs lg:text-sm text-gray-600 font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Filter Tabs with animation */}
-      <section className="py-8 bg-white border-b sticky top-20 z-40">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-4 bg-white border-b sticky top-20 z-40">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
           <motion.div 
             className="flex flex-wrap gap-2 justify-center"
             initial={{ opacity: 0, y: 20 }}
@@ -133,7 +161,7 @@ const GalleryPage = () => {
               <motion.button
                 key={category}
                 onClick={() => handleCategoryChange(category)}
-                className={`px-5 py-2 rounded-full text-sm font-medium transition-colors relative ${
+                className={`px-4 py-1.5 rounded-full text-xs lg:text-sm font-medium transition-colors relative ${
                   activeCategory === category
                     ? 'text-white'
                     : 'text-gray-600 hover:bg-gray-100'
@@ -156,10 +184,15 @@ const GalleryPage = () => {
       </section>
 
       {/* Gallery Grid with AnimatePresence */}
-      <section className="py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+      <section className="py-8 lg:py-10 bg-white">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp className="text-center mb-5">
+            <p className="text-gray-600 text-sm lg:text-base max-w-3xl mx-auto leading-relaxed">
+              Explore our visual journey through completed projects, showcasing our expertise in industrial construction, power plants, and infrastructure development.
+            </p>
+          </FadeInUp>
           <motion.div 
-            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
+            className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-3"
             layout
           >
             <AnimatePresence mode="popLayout">

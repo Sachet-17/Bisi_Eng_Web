@@ -16,7 +16,7 @@ const HomePage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section */}
-      <section className="relative min-h-[85vh] pt-24 overflow-hidden">
+      <section className="relative min-h-[55vh] pt-24 overflow-hidden">
         {/* Background with parallax effect */}
         <motion.div 
           className="absolute inset-0 bg-[#0f172a]" 
@@ -38,7 +38,7 @@ const HomePage = () => {
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
         </motion.div>
 
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-20 lg:pt-28 pb-32">
+        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 pt-16 lg:pt-20 pb-20">
           <div className="max-w-2xl">
             {/* Badge */}
             <motion.div
@@ -121,16 +121,19 @@ const HomePage = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
+      <section className="py-12 lg:py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp className="text-center mb-16">
+          <FadeInUp className="text-center mb-10">
             <span className="section-label">{statsSection.subtitle}</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] tracking-tight mb-4">
               {statsSection.title}
             </h2>
+            <p className="text-gray-600 text-base lg:text-lg max-w-3xl mx-auto leading-relaxed">
+              Our commitment to excellence is reflected in every project we undertake. These numbers represent decades of dedication, innovation, and unwavering quality standards that have made us a trusted partner for India's leading industrial giants.
+            </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 lg:gap-8">
             {statsSection.stats.map((stat, index) => (
               <StaggerItem key={index} className="text-center group">
                 <motion.div 
@@ -156,10 +159,10 @@ const HomePage = () => {
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
           {/* Left Column - Green Background */}
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-32 px-8 lg:px-16 flex items-center relative overflow-hidden">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-16 lg:py-20 px-8 lg:px-16 flex items-center relative overflow-hidden">
             <div className="relative z-10 max-w-lg mx-auto lg:mx-0 w-full">
               <motion.div
-                className="mb-10"
+                className="mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -171,7 +174,7 @@ const HomePage = () => {
                 <div className="w-16 h-1 bg-white/30 rounded-full"></div>
               </motion.div>
               <motion.div
-                className="space-y-4"
+                className="space-y-3 mb-6"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -180,7 +183,7 @@ const HomePage = () => {
                 {['Reliability.', 'Innovation.', 'Experience.'].map((word, idx) => (
                   <motion.h3 
                     key={idx}
-                    className="font-display text-5xl lg:text-6xl xl:text-7xl font-semibold text-white leading-none tracking-tight"
+                    className="font-display text-4xl lg:text-5xl xl:text-6xl font-semibold text-white leading-none tracking-tight"
                     whileHover={{ x: 12 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
@@ -188,6 +191,15 @@ const HomePage = () => {
                   </motion.h3>
                 ))}
               </motion.div>
+              <motion.p 
+                className="text-white/90 text-base leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                These core values drive everything we do, from project planning to final delivery. We combine decades of industry expertise with cutting-edge technology to deliver solutions that exceed expectations.
+              </motion.p>
             </div>
             {/* Decorative elements */}
             <motion.div 
@@ -208,10 +220,10 @@ const HomePage = () => {
           </FadeInLeft>
 
           {/* Right Column - Navy Background */}
-          <FadeInRight className="bg-[#0f172a] py-20 lg:py-32 px-8 lg:px-16 flex items-center relative">
+          <FadeInRight className="bg-[#0f172a] py-16 lg:py-20 px-8 lg:px-16 flex items-center relative">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto w-full">
               <motion.h2 
-                className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-white leading-tight mb-8 tracking-tight"
+                className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-white leading-tight mb-6 tracking-tight"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -220,14 +232,34 @@ const HomePage = () => {
                 Delivering unmatched quality and innovation in every project.
               </motion.h2>
               <motion.p 
-                className="text-gray-400 mb-10 leading-relaxed text-lg"
+                className="text-gray-400 mb-6 leading-relaxed text-base lg:text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                With over two decades of experience in the industry, our team combines innovative techniques, cutting-edge technology, and a commitment to quality craftsmanship.
+                With over two decades of experience in the industry, our team combines innovative techniques, cutting-edge technology, and a commitment to quality craftsmanship. We specialize in power plants, industrial facilities, and infrastructure projects across India.
               </motion.p>
+              <motion.ul 
+                className="space-y-3 mb-8 text-gray-300 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-[#22C55E] mt-1">✓</span>
+                  <span>ISO 9001:2015 & ISO 45001:2018 Certified</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#22C55E] mt-1">✓</span>
+                  <span>Trusted by 100+ leading industrial companies</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-[#22C55E] mt-1">✓</span>
+                  <span>4300+ skilled professionals across India</span>
+                </li>
+              </motion.ul>
               <Link to="/about">
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -253,14 +285,17 @@ const HomePage = () => {
       </section>
 
       {/* Trusted By Section with Marquee */}
-      <section className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
+      <section className="py-12 lg:py-16 bg-gray-50 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <FadeInUp>
-            <div className="text-center mb-14">
+            <div className="text-center mb-10">
               <span className="section-label">Our Partners</span>
               <h2 className="font-display text-3xl lg:text-4xl font-semibold text-[#0f172a] mb-4 tracking-tight">
                 Trusted By
               </h2>
+              <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto mb-4 leading-relaxed">
+                We're proud to partner with India's leading industrial giants, delivering excellence across power generation, manufacturing, and infrastructure sectors.
+              </p>
               <Link
                 to="/clients"
                 className="inline-flex items-center gap-2 text-base text-gray-600 hover:text-[#22C55E] transition-all duration-300 group font-medium"
@@ -280,7 +315,7 @@ const HomePage = () => {
             {(() => {
               const allClients = clientsPage.clientCategories.flatMap(category => category.clients);
               return (
-                <div className="marquee-container flex items-center gap-16 px-8">
+                <div className="marquee-container flex items-center gap-12 px-8">
                   {allClients.map((client, index) => (
                     <motion.div
                       key={`first-${index}-${client.name}`}
@@ -320,7 +355,7 @@ const HomePage = () => {
       {/* CTA Section */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-16 lg:py-20 px-8 lg:px-16 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -341,7 +376,7 @@ const HomePage = () => {
                 {ctaSection.title}
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-6 leading-relaxed text-base lg:text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -349,6 +384,26 @@ const HomePage = () => {
               >
                 {ctaSection.description}
               </motion.p>
+              <motion.ul 
+                className="space-y-2 mb-8 text-white/90 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Free consultation and project assessment</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Customized solutions for your specific needs</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Transparent pricing and timeline estimates</span>
+                </li>
+              </motion.ul>
               <Link to={ctaSection.cta.href}>
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -369,7 +424,7 @@ const HomePage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px]">
+          <FadeInRight className="relative min-h-[400px] lg:min-h-[450px]">
             <SafeImage
               src={ctaSection.image}
               alt="Industrial construction"

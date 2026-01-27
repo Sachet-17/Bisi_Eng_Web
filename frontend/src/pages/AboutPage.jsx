@@ -65,7 +65,7 @@ const AboutPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -82,7 +82,7 @@ const AboutPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -114,9 +114,14 @@ const AboutPage = () => {
       </section>
 
       {/* Stats Bar - Quick Overview */}
-      <section className="py-10 lg:py-12 bg-white border-b border-gray-100">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="text-center mb-4">
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto">
+              Our journey of excellence spans over two decades, marked by consistent growth, innovation, and unwavering commitment to quality.
+            </p>
+          </div>
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
             {[
               { value: '27+', label: 'Years Experience' },
               { value: '100+', label: "Happy client's" },
@@ -142,12 +147,12 @@ const AboutPage = () => {
       </section>
 
       {/* MD Message - Redesigned */}
-      <section id="md-message" className="py-20 lg:py-28 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
+      <section id="md-message" className="py-8 lg:py-10 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
         {/* Background accent */}
         <div className="absolute top-0 right-0 w-1/2 h-full bg-gradient-to-l from-[#22C55E]/5 to-transparent"></div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="grid lg:grid-cols-2 gap-6 lg:gap-8 items-center">
             {/* Image Section */}
             <FadeInLeft className="relative lg:order-1">
               <div className="relative">
@@ -193,11 +198,11 @@ const AboutPage = () => {
                 </h2>
               </motion.div>
               
-              <div className="space-y-4 mb-6">
+              <div className="space-y-3 mb-4">
                 {aboutPage.mdMessage.message.split('\n\n').map((paragraph, index) => (
                   <motion.p 
                     key={index} 
-                    className="text-gray-700 leading-relaxed text-base lg:text-lg"
+                    className="text-gray-700 leading-relaxed text-sm lg:text-base"
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -207,6 +212,17 @@ const AboutPage = () => {
                   </motion.p>
                 ))}
               </div>
+              <motion.div 
+                className="bg-[#22C55E]/10 rounded-lg p-4 border-l-4 border-[#22C55E]"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.6 }}
+              >
+                <p className="text-gray-700 text-sm lg:text-base italic">
+                  "Our success is built on trust, quality, and the dedication of our team. Every project is an opportunity to exceed expectations and strengthen our reputation as industry leaders."
+                </p>
+              </motion.div>
               
               <motion.div 
                 className="pt-4 border-t border-gray-200"
@@ -224,7 +240,7 @@ const AboutPage = () => {
       </section>
 
       {/* Capabilities & Values - Merged Scrollable Section */}
-      <section id="capabilities" className="py-8 md:py-12 lg:py-16 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
+      <section id="capabilities" className="py-6 md:py-8 lg:py-10 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -233,7 +249,7 @@ const AboutPage = () => {
           }}></div>
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
           {/* Scrollable Container */}
           <div className="relative">
             {/* Scrollable Content - Two Sections */}
@@ -244,7 +260,7 @@ const AboutPage = () => {
             >
               {/* Section 1: Capabilities */}
               <div className="flex-shrink-0 w-full snap-center">
-                <FadeInUp className="text-center mb-6 md:mb-6 lg:mb-8 px-2">
+                <FadeInUp className="text-center mb-4 md:mb-5 lg:mb-6 px-2">
                   <span className="inline-block text-xs sm:text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-2">
                     What We Do
                   </span>
@@ -256,14 +272,14 @@ const AboutPage = () => {
                   </p>
                 </FadeInUp>
 
-                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
+                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
                   {aboutPage.capabilities.items.map((item, index) => {
                     const Icon = iconMap[item.icon];
                     return (
                       <StaggerItem key={index}>
                         <motion.div 
-                          className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
-                          whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                          className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-3 sm:p-4 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
+                          whileHover={{ y: -5, boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}
                           transition={{ duration: 0.3 }}
                         >
                           {/* Icon */}
@@ -295,7 +311,7 @@ const AboutPage = () => {
 
               {/* Section 2: Values */}
               <div className="flex-shrink-0 w-full snap-center">
-                <FadeInUp className="text-center mb-6 md:mb-6 lg:mb-8 px-2">
+                <FadeInUp className="text-center mb-4 md:mb-5 lg:mb-6 px-2">
                   <span className="inline-block text-xs sm:text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-2">
                     Our Values
                   </span>
@@ -307,12 +323,12 @@ const AboutPage = () => {
                   </p>
                 </FadeInUp>
 
-                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-4 lg:gap-5">
+                <StaggerContainer staggerDelay={0.1} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-5">
                   {aboutPage.policy.policies.map((policy, index) => (
                     <StaggerItem key={index}>
                       <motion.div 
-                        className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-4 sm:p-5 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
-                        whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
+                        className="group relative bg-white/10 backdrop-blur-lg border border-white/20 p-3 sm:p-4 rounded-xl sm:rounded-2xl hover:bg-white/15 transition-all duration-300 h-full"
+                        whileHover={{ y: -5, boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}
                         transition={{ duration: 0.3 }}
                       >
                         {/* Icon */}
@@ -399,14 +415,14 @@ const AboutPage = () => {
       </section>
 
       {/* Organizational Structure - Modern Cards */}
-      <section id="structure" className="py-12 lg:py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp className="text-center mb-16">
+      <section id="structure" className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp className="text-center mb-6">
             <span className="section-label">Our Organization</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               {aboutPage.structure.title}
             </h2>
-            <p className="text-gray-600 text-base lg:text-lg max-w-2xl mx-auto mb-6">
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto mb-4">
               {aboutPage.structure.subtitle}
             </p>
             <Link
@@ -418,12 +434,12 @@ const AboutPage = () => {
             </Link>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.08} className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <StaggerContainer staggerDelay={0.08} className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
             {aboutPage.structure.departments.map((dept, index) => (
               <StaggerItem key={index}>
                 <motion.div 
-                  className="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-xl p-5 hover:border-[#22C55E]/30 transition-all duration-300 h-full"
-                  whileHover={{ y: -5, boxShadow: '0 15px 30px rgba(0,0,0,0.08)' }}
+                  className="group relative bg-gradient-to-br from-gray-50 to-white border border-gray-100 rounded-xl p-4 hover:border-[#22C55E]/30 transition-all duration-300 h-full"
+                  whileHover={{ y: -4, boxShadow: '0 12px 24px rgba(0,0,0,0.08)' }}
                   transition={{ duration: 0.3 }}
                 >
                   <motion.div
@@ -438,7 +454,10 @@ const AboutPage = () => {
                   <h3 className="font-light text-[#1a2744] mb-1.5 group-hover:text-[#22C55E] transition-colors">
                     {dept.name}
                   </h3>
-                  <p className="text-gray-600 text-sm">{dept.head}</p>
+                  <p className="text-gray-600 text-sm mb-2">{dept.head}</p>
+                  <p className="text-gray-500 text-xs leading-relaxed">
+                    Dedicated team ensuring operational excellence and strategic growth.
+                  </p>
                   
                   {/* Decorative line */}
                   <div className="absolute bottom-0 left-6 right-6 h-0.5 bg-gradient-to-r from-transparent via-[#22C55E]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -452,7 +471,7 @@ const AboutPage = () => {
       {/* CTA - Enhanced */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-12 lg:py-14 px-6 lg:px-12 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -473,7 +492,7 @@ const AboutPage = () => {
                 Ready to work with us?
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-6 leading-relaxed text-base lg:text-lg"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -501,7 +520,7 @@ const AboutPage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+          <FadeInRight className="relative min-h-[350px] lg:min-h-[400px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
             <div className="absolute inset-0">
               <motion.div 
                 className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"

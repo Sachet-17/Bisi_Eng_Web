@@ -16,7 +16,7 @@ const TeamPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -33,7 +33,7 @@ const TeamPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -64,25 +64,53 @@ const TeamPage = () => {
         </div>
       </section>
 
+      {/* Team Stats */}
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {[
+              { value: '4300+', label: 'Team Members' },
+              { value: '27+', label: 'Years Experience' },
+              { value: '100+', label: 'Projects Completed' },
+              { value: '4', label: 'Departments' }
+            ].map((stat, index) => (
+              <StaggerItem key={index} className="text-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-[#22C55E] mb-1 tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs lg:text-sm text-gray-600 font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Managing Director */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Leadership</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Managing Director
             </h2>
           </FadeInUp>
 
           <div className="max-w-md">
             <motion.div 
-              className="group bg-white rounded-2xl overflow-hidden shadow-soft"
+              className="group bg-white rounded-xl overflow-hidden shadow-soft"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+              whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
             >
-              <div className="relative h-96 overflow-hidden">
+              <div className="relative h-80 overflow-hidden">
                 <motion.div
                   className="w-full h-full"
                   whileHover={{ scale: 1.08 }}
@@ -97,14 +125,14 @@ const TeamPage = () => {
                   />
                 </motion.div>
               </div>
-              <div className="p-7">
-                <h3 className="font-display text-2xl font-semibold text-[#0f172a] tracking-tight mb-2">
+              <div className="p-5 lg:p-6">
+                <h3 className="font-display text-xl lg:text-2xl font-semibold text-[#0f172a] tracking-tight mb-2">
                   {teamPage.managingDirector.name}
                 </h3>
-                <p className="text-[#22C55E] text-base font-semibold mb-4">
+                <p className="text-[#22C55E] text-sm lg:text-base font-semibold mb-3">
                   {teamPage.managingDirector.position}
                 </p>
-                <p className="text-gray-500 text-base leading-relaxed">
+                <p className="text-gray-500 text-sm lg:text-base leading-relaxed">
                   {teamPage.managingDirector.bio}
                 </p>
               </div>
@@ -114,27 +142,27 @@ const TeamPage = () => {
       </section>
 
       {/* Leadership & Management */}
-      <section className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Management</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Admin and Management Team
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-              Experienced professionals dedicated to delivering excellence in every project.
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto leading-relaxed">
+              Experienced professionals dedicated to delivering excellence in every project. Our management team brings decades of combined experience in industrial engineering and project management.
             </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
             {teamPage.leadership.map((member, index) => (
               <StaggerItem key={index}>
                 <motion.div 
-                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
-                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  className="group bg-white rounded-xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-80 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
@@ -149,14 +177,14 @@ const TeamPage = () => {
                       />
                     </motion.div>
                   </div>
-                  <div className="p-7">
-                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                  <div className="p-5 lg:p-6">
+                    <h3 className="font-display text-lg lg:text-xl font-semibold text-[#0f172a] tracking-tight">
                       {member.name}
                     </h3>
-                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                    <p className="text-[#22C55E] text-xs lg:text-sm font-semibold mb-2">
                       {member.position}
                     </p>
-                    <p className="text-gray-500 text-base leading-relaxed">
+                    <p className="text-gray-500 text-sm lg:text-base leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
@@ -168,27 +196,27 @@ const TeamPage = () => {
       </section>
 
       {/* Site Executives */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Operations</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Site Executives
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-              Our dedicated site executives ensuring smooth operations across all project locations.
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto leading-relaxed">
+              Our dedicated site executives ensuring smooth operations across all project locations. They coordinate on-site activities, manage resources, and maintain quality standards.
             </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
             {teamPage.siteExecutives.map((member, index) => (
               <StaggerItem key={index}>
                 <motion.div 
-                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
-                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  className="group bg-white rounded-xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-80 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
@@ -203,14 +231,14 @@ const TeamPage = () => {
                       />
                     </motion.div>
                   </div>
-                  <div className="p-7">
-                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                  <div className="p-5 lg:p-6">
+                    <h3 className="font-display text-lg lg:text-xl font-semibold text-[#0f172a] tracking-tight">
                       {member.name}
                     </h3>
-                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                    <p className="text-[#22C55E] text-xs lg:text-sm font-semibold mb-2">
                       {member.position}
                     </p>
-                    <p className="text-gray-500 text-base leading-relaxed">
+                    <p className="text-gray-500 text-sm lg:text-base leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
@@ -222,27 +250,27 @@ const TeamPage = () => {
       </section>
 
       {/* Assistant Site Executives */}
-      <section className="py-20 lg:py-28 bg-gray-50 overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-gray-50 overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Operations</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Assistant Site Executives
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-              Supporting our site operations with dedication and expertise.
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto leading-relaxed">
+              Supporting our site operations with dedication and expertise. They assist in daily operations, quality control, and team coordination.
             </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10">
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6">
             {teamPage.assistantSiteExecutives.map((member, index) => (
               <StaggerItem key={index}>
                 <motion.div 
-                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
-                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  className="group bg-white rounded-xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-80 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
@@ -257,14 +285,14 @@ const TeamPage = () => {
                       />
                     </motion.div>
                   </div>
-                  <div className="p-7">
-                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                  <div className="p-5 lg:p-6">
+                    <h3 className="font-display text-lg lg:text-xl font-semibold text-[#0f172a] tracking-tight">
                       {member.name}
                     </h3>
-                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                    <p className="text-[#22C55E] text-xs lg:text-sm font-semibold mb-2">
                       {member.position}
                     </p>
-                    <p className="text-gray-500 text-base leading-relaxed">
+                    <p className="text-gray-500 text-sm lg:text-base leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
@@ -276,27 +304,27 @@ const TeamPage = () => {
       </section>
 
       {/* Office Staff */}
-      <section className="py-20 lg:py-28 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6">
             <span className="section-label">Support</span>
-            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-4 tracking-tight">
+            <h2 className="font-display text-3xl lg:text-4xl xl:text-5xl font-semibold text-[#0f172a] mb-3 tracking-tight">
               Office Staff
             </h2>
-            <p className="text-gray-600 text-lg max-w-2xl mx-auto leading-relaxed">
-              Our administrative team providing essential support for smooth operations.
+            <p className="text-gray-600 text-sm lg:text-base max-w-2xl mx-auto leading-relaxed">
+              Our administrative team providing essential support for smooth operations. They handle documentation, coordination, and ensure efficient communication across all departments.
             </p>
           </FadeInUp>
 
-          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-10 max-w-5xl mx-auto">
+          <StaggerContainer staggerDelay={0.1} onLoad={true} className="grid md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 lg:gap-6 max-w-5xl mx-auto">
             {teamPage.officeStaff.map((member, index) => (
               <StaggerItem key={index}>
                 <motion.div 
-                  className="group bg-white rounded-2xl overflow-hidden shadow-soft"
-                  whileHover={{ y: -8, boxShadow: '0 25px 50px rgba(0,0,0,0.12)' }}
+                  className="group bg-white rounded-xl overflow-hidden shadow-soft"
+                  whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.12)' }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="relative h-80 overflow-hidden">
+                  <div className="relative h-72 overflow-hidden">
                     <motion.div
                       className="w-full h-full"
                       whileHover={{ scale: 1.08 }}
@@ -311,14 +339,14 @@ const TeamPage = () => {
                       />
                     </motion.div>
                   </div>
-                  <div className="p-7">
-                    <h3 className="font-display text-xl font-semibold text-[#0f172a] tracking-tight">
+                  <div className="p-5 lg:p-6">
+                    <h3 className="font-display text-lg lg:text-xl font-semibold text-[#0f172a] tracking-tight">
                       {member.name}
                     </h3>
-                    <p className="text-[#22C55E] text-sm font-semibold mb-3">
+                    <p className="text-[#22C55E] text-xs lg:text-sm font-semibold mb-2">
                       {member.position}
                     </p>
-                    <p className="text-gray-500 text-base leading-relaxed">
+                    <p className="text-gray-500 text-sm lg:text-base leading-relaxed">
                       {member.bio}
                     </p>
                   </div>
@@ -332,7 +360,7 @@ const TeamPage = () => {
       {/* Join Us CTA - Enhanced */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-12 lg:py-14 px-6 lg:px-12 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -353,14 +381,34 @@ const TeamPage = () => {
                 Join Our Team
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-4 leading-relaxed text-sm lg:text-base"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
-                Be part of a team that's shaping the future of industrial engineering in India.
+                Be part of a team that's shaping the future of industrial engineering in India. We value innovation, collaboration, and professional growth.
               </motion.p>
+              <motion.ul 
+                className="space-y-2 mb-8 text-white/90 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Competitive compensation and benefits</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Continuous learning and development opportunities</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Work on challenging and impactful projects</span>
+                </li>
+              </motion.ul>
               <Link to="/contact">
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -381,7 +429,7 @@ const TeamPage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+          <FadeInRight className="relative min-h-[350px] lg:min-h-[400px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
             <div className="absolute inset-0">
               <motion.div 
                 className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"

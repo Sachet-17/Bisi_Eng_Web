@@ -16,7 +16,7 @@ const ClientsPage = () => {
       transition={{ duration: 0.4 }}
     >
       {/* Hero Section - Enhanced */}
-      <section className="relative min-h-[60vh] flex items-center bg-[#0f172a] overflow-hidden">
+      <section className="relative min-h-[35vh] flex items-center bg-[#0f172a] overflow-hidden">
         <div className="absolute inset-0">
           <div className="absolute inset-0 bg-gradient-to-r from-[#0f172a]/95 via-[#0f172a]/80 to-[#0f172a]/50" />
           <div className="absolute inset-0 bg-gradient-to-t from-[#0f172a]/50 to-transparent" />
@@ -33,7 +33,7 @@ const ClientsPage = () => {
           />
         </div>
         
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6 py-10 lg:py-12">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -64,19 +64,50 @@ const ClientsPage = () => {
         </div>
       </section>
 
+      {/* Client Metrics */}
+      <section className="py-6 lg:py-8 bg-white border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <StaggerContainer staggerDelay={0.1} className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
+            {[
+              { value: '150+', label: 'Happy Clients' },
+              { value: '500+', label: 'Projects Delivered' },
+              { value: '25+', label: 'Years of Trust' },
+              { value: '99%', label: 'Client Retention' }
+            ].map((stat, index) => (
+              <StaggerItem key={index} className="text-center">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: 'spring', stiffness: 400, damping: 17 }}
+                >
+                  <div className="font-display text-3xl lg:text-4xl font-bold text-[#22C55E] mb-1 tracking-tight">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs lg:text-sm text-gray-600 font-semibold">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              </StaggerItem>
+            ))}
+          </StaggerContainer>
+        </div>
+      </section>
+
       {/* Introduction */}
-      <section className="py-12 lg:py-16 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
-        <FadeInUp onLoad={true} className="max-w-4xl mx-auto px-6 lg:px-8 text-center">
-          <p className="text-lg text-gray-600 leading-relaxed">
+      <section className="py-6 lg:py-8 bg-gradient-to-br from-gray-50 to-white overflow-hidden relative">
+        <FadeInUp onLoad={true} className="max-w-4xl mx-auto px-4 lg:px-6 text-center">
+          <p className="text-sm lg:text-base text-gray-600 leading-relaxed mb-3">
             {clientsPage.intro}
+          </p>
+          <p className="text-xs lg:text-sm text-gray-500 leading-relaxed">
+            Our diverse client portfolio spans power generation, manufacturing, steel, cement, and infrastructure sectors, reflecting our versatility and expertise across multiple industries.
           </p>
         </FadeInUp>
       </section>
 
       {/* Client Categories */}
-      <section className="py-12 lg:py-16 bg-white overflow-hidden">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="space-y-16">
+      <section className="py-8 lg:py-10 bg-white overflow-hidden">
+        <div className="max-w-7xl mx-auto px-4 lg:px-6">
+          <div className="space-y-8 lg:space-y-10">
             {clientsPage.clientCategories.map((category, index) => (
               <motion.div 
                 key={index}
@@ -85,36 +116,36 @@ const ClientsPage = () => {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <motion.div 
-                  className="flex items-center gap-3 mb-8"
+                  className="flex items-center gap-3 mb-5"
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.5, delay: index * 0.1 + 0.1 }}
                 >
                   <motion.div 
-                    className="w-10 h-10 bg-[#22C55E]/10 rounded-lg flex items-center justify-center"
+                    className="w-9 h-9 bg-[#22C55E]/10 rounded-lg flex items-center justify-center"
                     whileHover={{ backgroundColor: '#22C55E', scale: 1.1 }}
                     transition={{ duration: 0.3 }}
                   >
-                    <Building2 className="w-5 h-5 text-[#22C55E]" />
+                    <Building2 className="w-4 h-4 text-[#22C55E]" />
                   </motion.div>
-                  <h2 className="text-2xl font-light text-[#1a2744]">
+                  <h2 className="text-xl lg:text-2xl font-light text-[#1a2744]">
                     {category.category}
                   </h2>
                 </motion.div>
-                <StaggerContainer staggerDelay={0.08} onLoad={index === 0} className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <StaggerContainer staggerDelay={0.08} onLoad={index === 0} className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-5">
                   {category.clients.map((client, clientIndex) => (
                     <StaggerItem key={clientIndex}>
                       <motion.div 
-                        className="bg-white p-6 rounded-xl shadow-sm flex flex-col items-center justify-center min-h-[200px] group cursor-pointer border border-gray-100 hover:border-[#22C55E]/20 transition-all duration-300 overflow-hidden"
+                        className="bg-white p-4 lg:p-5 rounded-lg shadow-sm flex flex-col items-center justify-center min-h-[160px] group cursor-pointer border border-gray-100 hover:border-[#22C55E]/20 transition-all duration-300 overflow-hidden"
                         whileHover={{ 
-                          y: -5, 
-                          boxShadow: '0 15px 30px rgba(0,0,0,0.1)',
+                          y: -4, 
+                          boxShadow: '0 12px 24px rgba(0,0,0,0.1)',
                           backgroundColor: '#fff'
                         }}
                         transition={{ duration: 0.3 }}
                       >
                         <motion.div
-                          className="w-full h-28 mb-4 flex items-center justify-center px-6 overflow-hidden relative"
+                          className="w-full h-24 mb-3 flex items-center justify-center px-4 overflow-hidden relative"
                           whileHover={{ scale: 1.05 }}
                           transition={{ duration: 0.3 }}
                         >
@@ -144,7 +175,7 @@ const ClientsPage = () => {
       </section>
 
       {/* Stats */}
-      <section className="py-12 lg:py-16 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
+      <section className="py-8 lg:py-10 bg-gradient-to-br from-[#1a2744] to-[#1E3A5F] overflow-hidden relative">
         {/* Background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -152,8 +183,8 @@ const ClientsPage = () => {
             backgroundSize: '40px 40px'
           }}></div>
         </div>
-        <div className="relative max-w-7xl mx-auto px-6 lg:px-8">
-          <FadeInUp onLoad={true} className="text-center mb-10 lg:mb-12">
+        <div className="relative max-w-7xl mx-auto px-4 lg:px-6">
+          <FadeInUp onLoad={true} className="text-center mb-6 lg:mb-8">
             <span className="inline-block text-sm text-[#22C55E] uppercase tracking-wider font-medium mb-3">
               Trust & Excellence
             </span>
@@ -161,7 +192,7 @@ const ClientsPage = () => {
               Trusted by Industry Leaders
             </h2>
           </FadeInUp>
-          <StaggerContainer staggerDelay={0.15} onLoad={true} className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+          <StaggerContainer staggerDelay={0.15} onLoad={true} className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
             {[
               { value: '150+', label: 'Happy Clients' },
               { value: '500+', label: 'Projects Delivered' },
@@ -187,7 +218,7 @@ const ClientsPage = () => {
       {/* CTA - Enhanced */}
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-2">
-          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-20 lg:py-28 px-8 lg:px-16 flex items-center">
+          <FadeInLeft className="bg-gradient-to-br from-[#22C55E] to-[#15803d] py-12 lg:py-14 px-6 lg:px-12 flex items-center">
             <div className="max-w-lg mx-auto lg:mx-0 lg:ml-auto lg:mr-20">
               <motion.span
                 className="section-label !text-white/80"
@@ -208,7 +239,7 @@ const ClientsPage = () => {
                 Become Our Next Success Story
               </motion.h2>
               <motion.p 
-                className="text-white/80 mb-10 leading-relaxed text-lg"
+                className="text-white/80 mb-4 leading-relaxed text-sm lg:text-base"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -216,6 +247,26 @@ const ClientsPage = () => {
               >
                 Join our growing list of satisfied clients. Let's build something great together.
               </motion.p>
+              <motion.ul 
+                className="space-y-2 mb-8 text-white/90 text-sm lg:text-base"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+              >
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Long-term partnerships with industry leaders</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Proven track record of successful project delivery</span>
+                </li>
+                <li className="flex items-start gap-2">
+                  <span className="text-white mt-1">•</span>
+                  <span>Dedicated support throughout project lifecycle</span>
+                </li>
+              </motion.ul>
               <Link to="/contact">
                 <motion.span
                   className="group inline-flex items-center gap-3 bg-white text-[#0f172a] px-8 py-4 rounded-full text-base font-semibold hover:bg-gray-100 transition-all duration-300 shadow-lg"
@@ -236,7 +287,7 @@ const ClientsPage = () => {
             </div>
           </FadeInLeft>
 
-          <FadeInRight className="relative min-h-[450px] lg:min-h-[550px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
+          <FadeInRight className="relative min-h-[350px] lg:min-h-[400px] bg-gradient-to-br from-[#0f172a] to-[#1e293b] flex items-center justify-center">
             <div className="absolute inset-0">
               <motion.div 
                 className="absolute top-0 right-0 w-56 lg:w-72 h-full bg-[#3B82F6]/90"
